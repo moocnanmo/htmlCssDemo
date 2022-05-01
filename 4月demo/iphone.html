@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #F5F5F5;
+    }
+
+    #iphone {
+      width: 662px;
+      height: 500px;
+      margin: auto;
+      position: relative;
+      border-top-left-radius: 106px;
+      border-top-right-radius: 106px;
+      border: 1px solid #22324b;
+      border-bottom: 0;
+      background-image: linear-gradient(45deg, #b3d1eb, #a6c2d8);
+      box-shadow:
+        inset 0px 0px 0px 1px #f7ffff,
+        inset 0px 0px 0px 2px #c8e2fd,
+        inset 0px 0px 0px 1px #f7ffff,
+        inset 0px 0px 0px 6px #0d0c08,
+        inset 0px 0px 0px 8px #d0e3f2;
+    }
+
+    #iphone::before,
+    #iphone::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 6px;
+      position: absolute;
+      left: 132px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    #iphone::after {
+      left: 0;
+      top: 135px;
+      width: 6px;
+      height: 10px;
+    }
+
+    .camera {
+      background-image: linear-gradient(45deg, #b6cbde, #afc5da, #b6cbde);
+      width: 330px;
+      height: 330px;
+      position: absolute;
+      top: 38px;
+      left: 38px;
+      border-radius: 80px;
+      box-shadow:
+        inset 1px 1px 0px 0px #e2f3ff,
+        inset -1px -1px 0px 0px #97b3cb,
+        inset 0px 0px 0px 8px #acc2d7,
+        inset 4px 4px 4px 10px #c2d7ea,
+        -5px 0px 6px #abc6d6,
+        -10px 0px 6px #6a8598,
+        4px 0px 6px #c3d5e0,
+        8px 0px 6px #91b0c5,
+        0px -4px 6px #e3ecf3,
+        0px 4px 6px #e3ecf3,
+        0px 12px 6px #94b0c6;
+    }
+
+    .camera-1,
+    .camera-2,
+    .camera-3 {
+      position: absolute;
+      width: 142px;
+      height: 142px;
+      top: 13px;
+      left: 13px;
+      border-radius: 50%;
+      background-image: linear-gradient(to bottom, #ecf5fe, #a9c6e8);
+      box-shadow:
+        inset 0px -1px 0px 0px #a6c4e8,
+        inset 0px -2px 0px 1px #283651,
+        0px 6px 4px #637585;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .camera-1::after,
+    .camera-2::after,
+    .camera-3::after {
+      position: absolute;
+      content: '';
+      display: block;
+      background-color: #010101;
+      width: 120px;
+      height: 120px;
+      margin-top: -2px;
+      border-radius: 50%;
+      box-shadow:
+        inset 0px 2px 0px 0px #010101,
+        inset 0px 3px 2px 1px #9da7b1,
+        inset 0px 0px 0px 8px #010810,
+        inset 0px 2px 0px 8px #303940,
+        inset 0px -2px 0px 7px #303940;
+    }
+
+    .camera-2 {
+      left: auto;
+      right: 19px;
+      top: 96px;
+    }
+
+    .camera-3 {
+      top: auto;
+      bottom: 10px;
+    }
+
+    .camera-1 .lens,
+    .camera-2 .lens,
+    .camera-3 .lens {
+      position: relative;
+      z-index: 10;
+      border-radius: 50%;
+      background-image: linear-gradient(to bottom, #041328, #16263d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .camera-1 .lens {
+      width: 48px;
+      height: 48px;
+    }
+
+    .camera-1 .lens::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #000b15;
+      background-image: linear-gradient(to right, transparent 0%, transparent 20%, #34a6cb 35%, transparent 45%, transparent 55%, #34a6cb 70%, transparent 80%);
+      box-shadow:
+        inset 0px 1px 2px 1px #0a216d,
+        inset 0px -1px 2px 1px #0a216d;
+    }
+
+    .camera-2 .lens {
+      width: 84px;
+      height: 84px;
+    }
+
+    .camera-2 .lens::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid #000b15;
+      background-image: linear-gradient(to right, transparent 0%, transparent 20%, #34a6cb 35%, transparent 45%, transparent 55%, #34a6cb 70%, transparent 80%);
+      box-shadow:
+        inset 0px 0px 0px 4px #112d38,
+        inset 0px 0px 3px 6px #087ff5;
+    }
+
+    .camera-3 .lens {
+      width: 62px;
+      height: 62px;
+    }
+
+    .camera-3 .lens::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid #000b15;
+      background-image: linear-gradient(to right, transparent 0%, transparent 10%, #34a6cb 25%, transparent 45%, transparent 60%, #34a6cb 75%, transparent 90%);
+      box-shadow:
+        inset 0px 0px 0px 4px #112d38,
+        inset 0px 0px 3px 6px #475883;
+    }
+
+    .flash {
+      background-image: linear-gradient(135deg, #fff, #bbd0e3);
+      position: absolute;
+      top: 18px;
+      right: 60px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        inset 0px 0px 0px 2px #a9bfd6,
+        inset 0px 0px 0px 4px #b9bec1,
+        inset 0px 0px 0px 6px #ced2d5,
+        inset 0px 0px 0px 8px #dfd6cf,
+        0px 6px 4px #788a9a;
+    }
+
+    .depth {
+      background-color: #000;
+      position: absolute;
+      bottom: 16px;
+      right: 60px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      box-shadow: inset 0px 0px 0px 1px #8fa4b5;
+    }
+
+    .hole {
+      width: 9px;
+      height: 9px;
+      background-color: #1f3e5b;
+      position: absolute;
+      left: 289px;
+      top: 256px;
+      border-radius: 50%;
+      box-shadow:
+        inset 0px 0px 0px 1px #bfd2e1,
+        0px 2px 0px 0px #486279;
+    }
+
+    .controls-left {
+      position: absolute;
+      background-color: #000;
+      width: 6px;
+      height: 95px;
+      bottom: 0;
+      left: -6px;
+      box-shadow:
+        inset 0px 0px 0px 1px #283651,
+        inset 0px 6px 0px 0px #eff4ff,
+        inset 0px 10px 0px 0px #010103;
+      border-top-left-radius: 2px;
+    }
+
+    .controls-right {
+      position: absolute;
+      background-color: #000;
+      width: 6px;
+      height: 100px;
+      bottom: 30px;
+      right: -6px;
+      box-shadow:
+        inset 0px 0px 0px 1px #283651,
+        inset 0px 6px 0px 0px #eff4ff,
+        inset 0px 10px 0px 0px #010103,
+        inset 0px -6px 0px 0px #eff4ff;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    .controls-right::after {
+      content: '';
+      display: block;
+      position: absolute;
+      background-color: #000;
+      width: 6px;
+      height: 50px;
+      bottom: 150px;
+      box-shadow:
+        inset 0px 0px 0px 1px #283651,
+        inset 0px 6px 0px 0px #eff4ff,
+        inset 0px 10px 0px 0px #010103,
+        inset 0px -6px 0px 0px #eff4ff;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    #drawing {
+      width: 674px;
+      height: 492px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="drawing">
+    <div id="iphone">
+      <div class="camera">
+        <div class="camera-1">
+          <div class="lens"></div>
+        </div>
+        <div class="camera-2">
+          <div class="lens"></div>
+        </div>
+        <div class="camera-3">
+          <div class="lens"></div>
+        </div>
+        <div class="flash"></div>
+        <div class="depth"></div>
+        <div class="hole"></div>
+      </div>
+      <div class="controls-left"></div>
+      <div class="controls-right"></div>
+    </div>
+  </div>
+</body>
+
+</html>

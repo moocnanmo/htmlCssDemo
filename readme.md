@@ -9,3 +9,7 @@
 ## 🐶2.导航栏切换输入
 
 ![img](https://i0.hdslb.com/bfs/article/663d02f8008b9ce86849bca8ba9c3dddee6427b7.gif)
+
+## 🐶3.画个iphone
+
+![img](https://img-blog.csdnimg.cn/0f15d156c709482aad4ebece471bf503.png)
