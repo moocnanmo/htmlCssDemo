@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>菜单悬停效果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* 100%窗口高度 */
+      height: 100vh;
+      /* 给个渐变背景 本人比较偏爱渐变背景 */
+      background: linear-gradient(200deg, #dad4ec, #f3e7e9);
+    }
+
+    ul {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      list-style: none;
+      /* 动画过渡 */
+      transition: 0.5s;
+    }
+
+    ul li a {
+      /* 相对定位 */
+      position: relative;
+      display: block;
+      text-align: center;
+      margin: 0 30px;
+      color: #333;
+      font-size: 25px;
+      text-decoration: none;
+    }
+
+    ul:hover li {
+      /* 不透明度 */
+      opacity: 0.2;
+      /* 模糊度 */
+      filter: blur(2px);
+    }
+
+    ul li:hover {
+      /* 不透明度 */
+      opacity: 1;
+      /* 模糊度 */
+      filter: blur(0px);
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><a href="#">首页</a></li>
+    <li><a href="#">关于我们</a></li>
+    <li><a href="#">服务</a></li>
+    <li><a href="#">案例</a></li>
+    <li><a href="#">用户反馈</a></li>
+  </ul>
+</body>
+
+</html>
