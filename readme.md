@@ -19,3 +19,7 @@
 ## 🐶4.导航栏悬停动画
 
 ![img](https://img-blog.csdnimg.cn/fb946b956c3b40bbbc952b9a381dc3f1.png)
+
+## 🐶5.线条绘制跳动爱心
+
+![img](//i0.hdslb.com/bfs/article/803f87decd866f8c560d76c8e0712e9eb0de12d0.gif)
