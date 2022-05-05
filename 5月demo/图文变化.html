@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 渐变背景 */
+      background: linear-gradient(200deg, #fff, #ddeede);
+    }
+
+    .container {
+      /* 最大宽度: 100%窗口宽度 */
+      max-width: 100vw;
+      /* 弹性布局 水平排列 允许换行 */
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .item {
+      position: relative;
+      width: 285px;
+      height: 190px;
+      margin: 15px;
+      /* 视距 */
+      perspective: 200px;
+    }
+
+    .img {
+      position: absolute;
+      /* 设置旋转的基点为右边 */
+      transform-origin: right;
+      /* 图片默认沿Y轴旋转0度,不透明度为1 */
+      transform: rotateY(0deg);
+      opacity: 1;
+      /* 设置过渡 */
+      transition: 0.5s;
+    }
+
+    .caption {
+      position: absolute;
+      z-index: 0;
+      background-color: #97b8a3;
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+      /* 字间距 */
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transition: 0.1s;
+    }
+
+    .item:hover .img {
+      /* 悬停时图片消失 */
+      transform: rotateY(-90deg);
+      opacity: 0;
+    }
+
+    .item:hover .caption {
+      /* 悬停时文字显示 */
+      transform: rotateY(0deg);
+      opacity: 1;
+    }
+
+    .caption h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">
+      <div class="img"><img src="../img/1.jpg" alt=""></div>
+      <div class="caption">
+        <h3>松</h3>
+        <p>要说松树，要比大它比不过榕树，要比美它比不过柳树。但是，秋天，花谢了，草枯了，许多树的叶子都落尽了，松树却在秋风秋雨中舒展它的枝叶。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img"><img src="../img/2.jpg" alt=""></div>
+      <div class="caption">
+        <h3>竹</h3>
+        <p>竹有阳刚之气，又具阴柔之美。三千年华夏国粹，竹君始终是东方人追求的境界，但同时又与东方文化紧密相联。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img"><img src="../img/3.jpg" alt=""></div>
+      <div class="caption">
+        <h3>梅</h3>
+        <p>驿外断桥边，寂寞开无主。已是黄昏独自愁，更着风和雨。无意苦争春，一任群芳妒。零落成泥碾作尘，只有香如故。</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
