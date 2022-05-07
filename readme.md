@@ -1,6 +1,6 @@
 <font style="background:#c0d6cb;color=green" size=4>项目介绍：</font>
 
-为了避免成为CSS重灾区一员，特意找了些让人 **眼前一亮** 的HTML+CSS小Demo来练手，主要锻炼伪类应用和提高审美。
+为了避免成为CSS重灾区一员，特意找了些让人 **眼前一亮** 的HTML+CSS小Demo来练手，主要锻炼伪类、动画使用技巧和提高应用审美。
 
 效果展示：
 
@@ -20,6 +20,6 @@
 
 ![img](https://img-blog.csdnimg.cn/fb946b956c3b40bbbc952b9a381dc3f1.png)
 
-## 🐶5.线条绘制跳动爱心
+## 🐶5.绘制小米图标
 
-![img](i0.hdslb.com/bfs/article/803f87decd866f8c560d76c8e0712e9eb0de12d0.gif)
+![img](https://img-blog.csdnimg.cn/49f6c5082bf94acd8a06682e2f19901c.png)
