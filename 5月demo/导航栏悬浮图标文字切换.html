@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <title>菜单栏图标悬停效果</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 渐变背景 */
+      background: linear-gradient(200deg, #eef1f5, #e6e9f0);
+    }
+
+    .nav {
+      display: flex;
+      background-color: #b7a1eb;
+      height: 100px;
+      border-radius: 20px;
+      /* 溢出隐藏 */
+      overflow: hidden;
+      /* 阴影 */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav .menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav .menu .item {
+      position: relative;
+      cursor: pointer;
+      padding: 0 10px;
+      width: 150px;
+      height: 100%;
+      /* 动画过渡 */
+      transition: ease 0.4s;
+    }
+
+    .nav .menu .item:hover {
+      background-color: #a38bdb;
+    }
+
+    .nav .menu .item .link {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100px;
+      color: #fff;
+      text-decoration: none;
+      overflow: hidden;
+      transition: ease 0.4s;
+    }
+
+    .nav .menu .item .link span {
+      position: absolute;
+      width: 100%;
+      bottom: -50%;
+      left: 0;
+      text-align: center;
+      opacity: 0;
+      transition: ease 0.4s;
+    }
+
+    .nav .menu .item .link .fa {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      font-size: 32px;
+      transition: ease 0.4s;
+    }
+
+    .nav .menu .item:hover .link span {
+      /* 鼠标移入文本出现、上移 */
+      opacity: 1;
+      bottom: 18px;
+    }
+
+    .nav .menu .item:hover .link .fa {
+      /* 鼠标移入图标上移 */
+      transform: translateY(-95%);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <ul class="menu">
+      <li class="item">
+        <a href="#" class="link">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          <span>首页</span>
+        </a>
+      </li>
+      <li class="item">
+        <a href="#" class="link">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <span>动态</span>
+        </a>
+      </li>
+      <li class="item">
+        <a href="#" class="link">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          <span>发布</span>
+        </a>
+      </li>
+      <li class="item">
+        <a href="#" class="link">
+          <i class="fa fa-bell" aria-hidden="true"></i>
+          <span>消息</span>
+        </a>
+      </li>
+      <li class="item">
+        <a href="#" class="link">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span>我的</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</body>
+
+</html>
