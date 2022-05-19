@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <title>简单好玩的水球加载效果</title>
+  <style>
+    * {
+      /* 初始化 取消页面内外边距 */
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* 100%窗口高度 */
+      height: 100vh;
+      /* 渐变背景 */
+      background: linear-gradient(to bottom, #89f7fe, #66a6ff);
+    }
+
+    .wave {
+      width: 200px;
+      height: 200px;
+      background-color: #2797e7;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.2);
+      /* 溢出隐藏 */
+      overflow: hidden;
+    }
+
+    .wave::before {
+      content: "";
+      width: 300px;
+      height: 300px;
+      background-color: rgba(255, 255, 255, 0.8);
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -65%);
+      border-radius: 40%;
+      /* 执行动画：动画名称 时长 线性的 无限次播放 */
+      animation: wave 5s linear infinite;
+    }
+
+    .wave::after {
+      content: "加载中...";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, 40px);
+      color: #2797e7;
+    }
+
+    /* 定义动画 */
+    @keyframes wave {
+      100% {
+        transform: translate(-50%, -65%) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wave"></div>
+</body>
+
+</html>
