@@ -23,3 +23,7 @@
 ## 🐶5.绘制小米图标
 
 ![img](https://img-blog.csdnimg.cn/49f6c5082bf94acd8a06682e2f19901c.png)
+
+## 🐶6.旋转相册
+
+![img](https://i0.hdslb.com/bfs/article/731724e6a03228a2ed372a3ac538f76c5780d39a.gif)
