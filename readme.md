@@ -8,21 +8,21 @@
 
 ![img](https://i0.hdslb.com/bfs/article/06bf2df6b37173d9bd6cece459a21e603f6e16b6.gif)
 
-## 🐶2.导航栏切换输入
+## 🐶2.文章卡片
 
-![img](https://i0.hdslb.com/bfs/article/663d02f8008b9ce86849bca8ba9c3dddee6427b7.gif)
+![img](https://img-blog.csdnimg.cn/aa1d4470bdb64cafa8117f48a7defbf3.png)
 
 ## 🐶3.画个iphone
 
 ![img](https://img-blog.csdnimg.cn/0f15d156c709482aad4ebece471bf503.png)
 
-## 🐶4.导航栏悬停动画
+## 🐶4.css绘制各种小动物
 
-![img](https://img-blog.csdnimg.cn/fb946b956c3b40bbbc952b9a381dc3f1.png)
+![img](https://img-blog.csdnimg.cn/aa186b83eef24f308ce0f4165bf042a1.png)
 
-## 🐶5.绘制小米图标
+## 🐶5.各种有意思的小设计
 
-![img](https://img-blog.csdnimg.cn/49f6c5082bf94acd8a06682e2f19901c.png)
+![img](https://img-blog.csdnimg.cn/5dc9b50af42e464da08204b21264ebd2.png)
 
 ## 🐶6.旋转相册
 
