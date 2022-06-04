@@ -24,6 +24,6 @@
 
 ![img](https://img-blog.csdnimg.cn/5dc9b50af42e464da08204b21264ebd2.png)
 
-## 🐶6.旋转相册
+## 🐶6.动画、3D透视类
 
 ![img](https://i0.hdslb.com/bfs/article/731724e6a03228a2ed372a3ac538f76c5780d39a.gif)
