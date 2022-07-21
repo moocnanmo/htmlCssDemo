@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <title>炫彩的发光字特效</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #06252e;
+    }
+
+    .container {
+      /* 投影效果 */
+      -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+    }
+
+    h2 {
+      color: #fff;
+      font-size: 96px;
+      /* 字间距 */
+      letter-spacing: 15px;
+      /* 转大写 */
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 76px;
+      outline: none;
+      /* 自定义属性--c，可通过var函数对其调用 */
+      --c: lightseagreen;
+      /* 调用自定义属性--c，设置文字阴影（发光效果） */
+      text-shadow: 0 0 10px var(--c),
+        0 0 2px var(--c),
+        0 0 4px var(--c),
+        0 0 8px var(--c),
+        0 0 8px var(--c);
+      /* 执行动画：动画名 时长 线性的 无限次播放 */
+      animation: animate 3s linear infinite;
+    }
+
+    /* 改变颜色区间 */
+    @keyframes animate {
+      to {
+        filter: hue-rotate(30deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 contenteditable="true">hello,nan</h2>
+  </div>
+</body>
+
+</html>
