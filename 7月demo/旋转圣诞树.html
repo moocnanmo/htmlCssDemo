@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <title>旋转的圣诞树</title>
+  <style>
+    @import url("http://fonts.googleapis.com/css?family=Kanit");
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #333;
+    }
+
+    .star {
+      width: 36px;
+      height: 36px;
+      position: absolute;
+      left: calc(50% - 18px);
+      top: calc(20vh - 22px);
+      z-index: 2;
+      background-color: #ffce54;
+      /* 裁切成五角星 */
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      transition: 0.3s;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    .tree li {
+      position: absolute;
+      top: 20vh;
+      right: 50%;
+      width: 1px;
+      /* 通过var函数调用自定义属性--h，设置每一条线的高度 */
+      height: var(--h);
+      /* 线条背景颜色，透明往浅绿色渐变 */
+      background: linear-gradient(transparent, rgba(46, 204, 113, 0.35));
+      /* 设置旋转元素的基点位置 */
+      transform-origin: 50% 0;
+      /* 执行动画：动画名 时长 加速后减速 无限次播放 */
+      animation: swing 4s ease-in-out infinite;
+      /* 通过var函数调用自定义属性--d，设置每一条线的动画延迟时间 */
+      animation-delay: var(--d);
+    }
+
+    /* 彩色小圆点 */
+    .tree li::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      bottom: -1px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+    }
+
+    /* 为下标是4的倍数的所有小圆点设置背景色 */
+    .tree li:nth-child(4n)::before {
+      background-color: #d8334a;
+    }
+
+    /* 为下标是4的倍数加1的所有小圆点设置背景色 */
+    .tree li:nth-child(4n+1)::before {
+      background-color: #ffce54;
+    }
+
+    /* 为下标是4的倍数加2的所有小圆点设置背景色 */
+    .tree li:nth-child(4n+2)::before {
+      background-color: #2ecc71;
+    }
+
+    /* 为下标是4的倍数加3的所有小圆点设置背景色 */
+    .tree li:nth-child(4n+3)::before {
+      background-color: #5d9cec;
+    }
+
+    /* 定义动画 */
+    @keyframes swing {
+
+      0%,
+      100% {
+        transform: rotateZ(-30deg);
+      }
+
+      5%,
+      45% {
+        opacity: 0.25;
+      }
+
+      50%,
+      100%,
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        transform: rotateZ(30deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="star"></div>
+  <ul class="tree" id="tree"></ul>
+  <script>
+    // 构造一棵树
+    function createTree () {
+      for (let i = 0; i < 128; i++) {
+        // 创建li元素
+        let li = document.createElement('li');
+        // 设置li元素的样式
+        // --h、--d为自定义属性，可通过var函数对其调用
+        // --h：线条高度
+        // --d：动画的延迟时间
+        li.style.cssText = '--h:calc(60vh / 128 * ' + i + ');--d:calc(-28s / 128 * ' + i + ');';
+        // 追加li元素
+        document.getElementById('tree').appendChild(li);
+      }
+    }
+    window.addEventListener('load', () => {
+      // 加载完毕后，构建树
+      createTree();
+    })
+  </script>
+</body>
+
+</html>
