@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style media="screen">
+    #cup {
+      position: relative;
+      width: 500px;
+      margin: 30px auto;
+      background-color: #ddd;
+      z-index: 9;
+      padding: 50px 0;
+      font-size: 0px;
+    }
+
+    /*杯盖*/
+    .cupTop {
+      display: none;
+      display: block;
+      position: relative;
+      margin: 0 auto 3px;
+      width: 200px;
+      height: 94px;
+      background:
+        linear-gradient(90deg, rgba(198, 213, 210, 1) 0px,
+          rgba(198, 213, 210, 1) 10px,
+          rgba(229, 241, 237, 1) 45px,
+          rgba(229, 241, 237, 1) 64px,
+          rgba(142, 147, 140, 1) 200px);
+      border-radius: 36px 36px 0px 0px/33px 33px 0px 0px;
+      z-index: 20;
+    }
+
+    .div1 {
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      margin-left: -73px;
+      width: 146px;
+      height: 5px;
+      border-radius: 50%;
+      border-radius: 115px 115px 0px 0px/10px 10px 0px 0px;
+      background-color: #ccc;
+      background:
+        linear-gradient(90deg, rgba(219, 231, 227, 1) 0px,
+          rgba(229, 241, 237, 1) 31px,
+          rgba(175, 181, 171, 1) 130px);
+    }
+
+    .div3 {
+      position: absolute;
+      left: -7px;
+      bottom: 5px;
+      width: 13px;
+      height: 3px;
+      z-index: 0;
+      background-color: #ddd;
+      border-radius: 0px 0px 10px 0px/0px 0px 5px 0px;
+    }
+
+    .div4 {
+      left: auto;
+      right: -7px;
+      background-color: #ddd;
+      border-radius: 0px 0px 0px 10px/0px 0px 0px 5px;
+    }
+
+    .dot {
+      position: absolute;
+      bottom: 15px;
+      left: 96px;
+      width: 54px;
+      height: 15px;
+      font-size: 0px;
+    }
+
+    .dot1 {
+      display: inline-block;
+      vertical-align: top;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin: 3px 4px 3px 5px;
+      background:
+        linear-gradient(-60deg,
+          rgba(174, 179, 173, 1) 0px,
+          rgba(238, 244, 240, 1) 9px);
+    }
+
+    #cupBody {
+      position: relative;
+      left: 0;
+      top: 0;
+      display: none;
+      display: block;
+    }
+
+    #mainBody {
+      height: 475px;
+      width: 200px;
+      margin: 0px auto;
+      background:
+        /*纵向效果*/
+        /*linear-gradient(0deg,rgba(63, 44, 14, 0.1) 0px,
+      rgba(63, 44, 14, 0.1) 42px,
+      rgba(50, 33, 5, 1) 44px,
+      rgba(50, 33, 5, 0) 46px,
+      rgba(50, 33, 5, 0) 475px),*/
+        linear-gradient(90deg, rgba(105, 102, 87, 1) 0px,
+          rgba(108, 96, 70, 1) 20px,
+          rgba(232, 211, 158, 1) 36px,
+          rgba(232, 211, 158, 1) 40px,
+          rgba(122, 105, 62, 1) 50px,
+          rgba(122, 105, 62, 1) 54px,
+          rgba(238, 216, 165, 1) 67px,
+          rgba(238, 216, 165, 1) 72px,
+          rgba(194, 173, 120, 1) 78px,
+          rgba(194, 173, 120, 1) 81px,
+          rgba(130, 103, 48, 1) 100px,
+          rgba(145, 114, 57, 1) 115px,
+          rgba(117, 96, 49, 1) 131px,
+          rgba(63, 44, 14, 1) 189px);
+      position: relative;
+      box-shadow: 0px 5px 5px #666;
+      border-radius: 10px 10px 100px 100px/5px 5px 60px 60px;
+    }
+
+    .div2 {
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      margin-left: -95px;
+      width: 190px;
+      height: 8px;
+      background:
+        linear-gradient(90deg,
+          rgba(119, 122, 115, 1) 0px,
+          rgba(8, 2, 4, 1) 180px);
+      /*linear-gradient( 90deg,
+          red 0px,
+          blue 180px);*/
+      border-radius: 0px 0px 90px 90px/0px 0px 5px 5px;
+      z-index: 1;
+    }
+
+    /*div5 div6:杯子身体两边的曲线*/
+    .div5 {
+      position: absolute;
+      top: 0px;
+      left: -6px;
+      background-color: #ddd;
+      height: 380px;
+      width: 11px;
+      border-radius: 0px 7px 9px 0px/0px 122px 200px 0px;
+      z-index: 4;
+    }
+
+    .div6 {
+      left: auto;
+      right: -6px;
+      border-radius: 7px 0px 0px 9px/122px 0px 0px 200px;
+    }
+
+    #txt {
+      position: absolute;
+      bottom: 68px;
+      left: 50%;
+      margin-left: -41px;
+      height: 22px;
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1;
+      color: rgba(191, 161, 159, 1);
+      transform-origin: left;
+      transform: scale(0.8, 1) rotate(0deg) skew(0deg, 0deg);
+      z-index: 30;
+    }
+
+    /*底部的线使用border*/
+    .line0 {
+      display: none;
+      display: block;
+      position: absolute;
+      left: 50%;
+      margin-left: -100px;
+      bottom: 38px;
+      box-sizing: border-box;
+      width: 200px;
+      height: 90px;
+      border: 9px solid transparent;
+      border-left-width: 0px;
+      border-right-width: 0px;
+      border-bottom-width: 2px;
+      border-bottom-color: rgba(66, 51, 18, 1);
+      background:
+        linear-gradient(90deg, rgba(105, 102, 87, 1) 0px,
+          rgba(108, 96, 70, 1) 20px,
+          rgba(232, 211, 158, 1) 36px,
+          rgba(232, 211, 158, 1) 40px,
+          rgba(232, 211, 158, 1) 40px,
+          rgba(122, 105, 62, 1) 50px,
+          rgba(122, 105, 62, 1) 54px,
+          rgba(238, 216, 165, 1) 67px,
+          rgba(238, 216, 165, 1) 72px,
+          rgba(194, 173, 120, 1) 78px,
+          rgba(194, 173, 120, 1) 81px,
+          rgba(130, 103, 48, 1) 100px,
+          rgba(145, 114, 57, 1) 115px,
+          rgba(117, 96, 49, 1) 131px,
+          rgba(63, 44, 14, 1) 189px);
+      border-radius: 0px 0px 100px 100px / 0px 0px 54px 54px;
+      z-index: 3;
+    }
+
+    .line {
+      bottom: 36px;
+      border-bottom-color: transparent;
+      background:
+        linear-gradient(90deg, rgba(111, 109, 95, 1) 0px,
+          rgba(116, 104, 78, 1) 7px,
+          rgba(116, 104, 78, 1) 10px,
+          rgba(220, 202, 161, 1) 27px,
+          rgba(122, 108, 68, 1) 50px,
+          rgba(122, 108, 68, 1) 54px,
+          rgba(201, 181, 145, 1) 66px,
+          rgba(126, 109, 66, 1) 96px,
+          rgba(147, 128, 80, 1) 115px,
+          rgba(127, 110, 75, 1) 135px,
+          rgba(117, 96, 49, 1) 154px,
+          rgba(81, 71, 46, 1) 183px,
+          rgba(63, 44, 14, 1) 195px);
+      z-index: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cup">
+    <!-- 杯盖 -->
+    <div class="cupTop">
+      <!-- 杯子顶部 -->
+      <div class="div1"></div>
+      <!-- 三个点 -->
+      <div class="dot">
+        <div class="dot1"></div>
+        <div class="dot1"></div>
+        <div class="dot1"></div>
+      </div>
+    </div>
+    <!-- 杯子本体 -->
+    <div id="cupBody">
+      <!-- 杯子颈部 -->
+      <div class="div2">
+        <div class="div3"></div>
+        <div class="div3 div4"></div>
+      </div>
+      <!-- 杯子身体 -->
+      <div id="mainBody">
+        <div class="div5"></div>
+        <div class="div5 div6"></div>
+        <div id="txt">THERMOS</div>
+      </div>
+      <div class="line0"></div>
+    </div>
+  </div>
+</body>
+
+</html>
