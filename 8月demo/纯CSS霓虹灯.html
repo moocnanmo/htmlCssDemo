@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      background-color: #222;
+    }
+
+    .bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#82dbd8, #9ba3eb);
+      z-index: 10;
+      mix-blend-mode: multiply;
+    }
+
+    .neon-clock {
+      margin-top: 84px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 0 2px #fff5, 0 0 0 20px #333, 0 0 0 22px #fff, 0 0 50px #fff,
+        0 0 500px #fff;
+    }
+
+    .neon-clock .hour-hand {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 100px;
+      background: linear-gradient(0deg, transparent, #fff);
+      border-radius: 2px;
+      /* 让指针从底部开始旋转 */
+      transform-origin: bottom;
+      animation: rotate calc(60s * 60 * 12) linear infinite;
+    }
+
+    .neon-clock .minute-hand {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 150px;
+      background: linear-gradient(0deg, transparent, #fff);
+      border-radius: 2px;
+      transform-origin: bottom;
+      animation: rotate calc(60s * 60) linear infinite;
+    }
+
+    .neon-clock .second-hand {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 200px;
+      background: linear-gradient(0deg, transparent, #fff);
+      border-radius: 2px;
+      transform-origin: bottom;
+      animation: rotate 60s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: translate(-50%, -100%) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(-50%, -100%) rotate(360deg);
+      }
+    }
+
+    .neon-clock ul li {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      list-style: none;
+      transform: rotate(calc(30deg * var(--i)));
+      transform-origin: 0 240px;
+    }
+
+    .neon-clock ul li span {
+      color: white;
+      font-size: 2em;
+      text-shadow: 0 0 15px #fff, 0 0 35px #fff, 0 0 75px #fff, 0 0 150px #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <!-- 霓虹灯特效时钟 -->
+  <div class="neon-clock">
+    <!-- 时针 -->
+    <div class="hour-hand"></div>
+    <!-- 分针 -->
+    <div class="minute-hand"></div>
+    <!-- 秒针 -->
+    <div class="second-hand"></div>
+    <!-- 刻度 -->
+    <ul>
+      <li style="--i: 0"><span>1</span></li>
+      <li style="--i: 1"><span>2</span></li>
+      <li style="--i: 2"><span>3</span></li>
+      <li style="--i: 3"><span>4</span></li>
+      <li style="--i: 4"><span>5</span></li>
+      <li style="--i: 5"><span>6</span></li>
+      <li style="--i: 6"><span>7</span></li>
+      <li style="--i: 7"><span>8</span></li>
+      <li style="--i: 8"><span>9</span></li>
+      <li style="--i: 9"><span>10</span></li>
+      <li style="--i: 10"><span>11</span></li>
+      <li style="--i: 11"><span>12</span></li>
+    </ul>
+  </div>
+
+</body>
+
+</html>
