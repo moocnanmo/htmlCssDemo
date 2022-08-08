@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css" />
+
+  <style>
+    body {
+      color: #d6a63c;
+    }
+
+    .range-wrapper {
+      width: 100%;
+      margin: 20px auto;
+    }
+
+    input[type='range'] {
+      -webkit-appearance: none;
+      width: 300px;
+      border-radius: 10px;
+      /*这个属性设置使填充进度条时的图形为圆角*/
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 8px;
+      border-radius: 10px;
+      /*将轨道设为圆角的*/
+      background-color: #d6a63c;
+    }
+
+    input[type='range']:focus {
+      outline: none;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 24px;
+      width: 24px;
+      margin-top: -8px;
+      /*使滑块超出轨道部分的偏移量相等*/
+      background: #ffffff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    input[type='range']:focus::-webkit-slider-thumb {
+      background: #d6a63c;
+      /* background-image: url('https://p3-passport.byteacctimg.com/img/user-avatar/fc8114566fc29a28d2d49e1964872775~300x300.image'),
+          -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefe), color-stop(0.49, #dddddd), color-stop(0.51, #d1d1d1), color-stop(1, #a1a1a1));
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: 50%; */
+      box-shadow: 0 0 0 3px #fff, 0 0 0 6px #d6a63c;
+    }
+
+    input[type='range']::-webkit-slider-thumb:hover {
+      background: #d6a63c;
+    }
+
+    input[type='range']:active::-webkit-slider-thumb {
+      background: #d6a63c;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 700px;
+      height: 400px;
+      margin: 0 auto;
+      /* background: red; */
+    }
+
+    .ellipse-wrapper {
+      width: 60px;
+      position: absolute;
+      top: 30%;
+      left: 56%;
+      transform: translate(-50%, -50%) rotate(20deg);
+    }
+
+    /* 椭圆 */
+    .ellipse {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      background: #000;
+      border-radius: 50% / 100% 100% 0 0;
+    }
+
+    .ellipse::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 79px;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #000;
+      border-radius: 50% / 100% 100% 0 0;
+      transform: rotate(180deg);
+    }
+
+    /* blingbling */
+    .buling1 {
+      position: absolute;
+      top: 50px;
+      right: 38px;
+      width: 30px;
+      height: 30px;
+      border-radius: 42% 50%;
+      background-color: #fff;
+    }
+
+    .buling2 {
+      position: absolute;
+      bottom: 50px;
+      left: 35px;
+      width: 16px;
+      height: 30px;
+      border-radius: 10px 20px;
+      background-color: #fff;
+    }
+
+    /* eye */
+    .eye {
+      display: inline-block;
+      margin-right: 120px;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-color: #d6a63c;
+      border: 1px solid #333;
+      border-radius: 64px 128px;
+      transform: rotate(-20deg);
+    }
+
+    .mirrorRotateLevel {
+      transform: rotateY(180deg) rotate(-20deg);
+      /* 水平镜像翻转 */
+    }
+
+    .sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* transform: translate(-50%, -50%); */
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #back {}
+  </style>
+</head>
+
+<body>
+  <div class="range-wrapper">
+    <input class="gradient" type="range" min="1" max="100" step="1" value="100" onchange="rangeChange(this.value)"
+      oninput="rangeChange(this.value)" />
+    <span></span>
+  </div>
+
+  <div class="card">
+    <div class="eye">
+      <!-- 瞳孔 -->
+      <div class="ellipse-wrapper">
+        <div class="ellipse"></div>
+      </div>
+      <!-- 晶状体 -->
+      <div></div>
+
+      <div class="buling1"></div>
+      <div class="buling2"></div>
+    </div>
+
+    <!-- eye right -->
+    <div class="eye mirrorRotateLevel">
+      <div class="ellipse-wrapper">
+        <div class="ellipse"></div>
+      </div>
+      <div class="buling1"></div>
+      <div class="buling2"></div>
+    </div>
+  </div>
+
+  <script>
+    const span2 = document.getElementsByTagName('span')[0]
+    const body = document.getElementsByTagName('body')[0]
+    const ellipse = document.getElementsByClassName('ellipse-wrapper')[0]
+    const ellipse1 = document.getElementsByClassName('ellipse-wrapper')[1]
+
+    body.style.backgroundColor = 'rgb(26 25 25 / 100%)'
+    ellipse.style.width = '160px'
+    ellipse1.style.width = '160px'
+
+    function rangeChange (value) {
+      span2.innerText = value
+
+      const count = value > 20 ? value : 20
+
+      ellipse.style.width = 1.6 * count + 'px'
+      ellipse1.style.width = 1.6 * count + 'px'
+
+      // 背景透明
+      body.style.backgroundColor = 'rgba(26 25 25 / ' + value + '%)'
+      console.log('body.style.backgroundColor: ', body.style.backgroundColor)
+      // body.style.backgroundColor = '#fff'
+    }
+  </script>
+</body>
+
+</html>
