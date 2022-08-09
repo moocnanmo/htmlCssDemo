@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #93b5cf;
+    }
+
+    section {
+      width: 650px;
+      height: 300px;
+      padding: 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    span {
+      position: relative;
+      animation: cloud 5s ease-in-out infinite;
+      background: white;
+      border-radius: 50%;
+      box-shadow: white 65px -15px 0 -4px, white 25px -25px, white 30px 10px, white 60px 15px 0 -10px, white 85px 5px 0 -5px;
+      height: 50px;
+      width: 50px;
+      margin-left: -60px;
+    }
+
+    span:after {
+      animation: cloud_shadow 5s ease-in-out infinite;
+      background: black;
+      border-radius: 50%;
+      content: '';
+      height: 15px;
+      width: 120px;
+      opacity: 0.2;
+      position: absolute;
+      left: 5px;
+      bottom: -60px;
+    }
+
+    @keyframes cloud {
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes cloud_shadow {
+      50% {
+        transform: translateY(0px) scale(.7);
+        opacity: .05;
+      }
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <section><span></span></section>
+</body>
+
+</html>

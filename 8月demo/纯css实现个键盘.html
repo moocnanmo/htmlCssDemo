@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: rgb(51, 47, 47);
+    }
+
+    .keyboard {
+      width: 920px;
+      height: 324px;
+      margin: 100px auto;
+      display: grid;
+      grid-template-columns: repeat(30, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      padding: 18px;
+      background: black;
+      overflow: hidden;
+      box-shadow: -3px -3px 10px #fff, 3px 3px 6px #ddd;
+      animation-timing-function: ease-in-out;
+      animation-name: breathe;
+      animation-duration: 15s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    .key {
+      border-radius: 10px;
+      grid-column: auto/span 2;
+      display: grid;
+      place-items: center;
+      height: 51px;
+      cursor: pointer;
+      color: #fff;
+      background: black;
+      box-shadow: -3px -3px 10px #fff, 3px 3px 6px #ddd;
+      transition: all .3s;
+
+
+    }
+
+    .key:hover {
+      box-shadow: 0 0 0 #fff, 0 0 0 #ddd, inset 3px 3px 6px rgba(0, 0, 0, 0.2),
+        inset -3px -3px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    /*用于指定个别网格的大小类名*/
+    .kl3 {
+      grid-column: auto/span 3;
+    }
+
+    .kl4 {
+      grid-column: auto/span 4;
+    }
+
+    .kl5 {
+      grid-column: auto/span 5;
+    }
+
+    .kl12 {
+      grid-column: auto/span 12;
+    }
+
+    /*用于指定个别网格的颜色类名*/
+    .color1 {
+      background: #ed4c67;
+      color: #fbdbe1;
+    }
+
+    .color2 {
+      background: #d63031;
+      color: #f7d6d6;
+    }
+
+    .color3 {
+      background: #12cbc4;
+      color: #cafaf8;
+    }
+
+    .color4 {
+      background: #ee5a24;
+      color: #fcded3;
+    }
+
+    .color5 {
+      background: #fdcb6e;
+      color: #fff5e2;
+    }
+
+    .color6 {
+      background: #1e90ff;
+      color: #d2e9ff;
+    }
+
+    .color7 {
+      background: #be2edd;
+      color: #f2d5f8;
+    }
+
+    .color8 {
+      background: #5352ed;
+      color: #dddcfb;
+    }
+
+    .color9 {
+      background: #26de81;
+      color: #d4f8e6;
+    }
+
+    @keyframes breathe {
+      0% {
+        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      10% {
+
+        box-shadow: 1px 1px 80px rgba(59, 255, 255, 1);
+      }
+
+      20% {
+        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      30% {
+        box-shadow: 1px 1px 80px rgb(235, 5, 82);
+      }
+
+      40% {
+        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      50% {
+        box-shadow: 1px 1px 80px rgb(15, 226, 15);
+      }
+
+      60% {
+        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      70% {
+        box-shadow: 1px 1px 80px rgb(72, 7, 223);
+      }
+
+      80% {
+        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      100% {
+        box-shadow: 1px 1px 80px rgb(184, 233, 9);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 原文 -->
+  <!-- https://juejin.cn/post/7085536020350894094 -->
+  <div class="keyboard">
+    <div class="key color1" title="吃披萨">🍕</div>
+    <div class="key">
+      <span>!</span>
+      <span>1</span>
+    </div>
+    <div class="key">
+      <span>@</span>
+      <span>2</span>
+    </div>
+    <div class="key">
+      <span>#</span>
+      <span>3</span>
+    </div>
+    <div class="key">
+      <span>$</span>
+      <span>4</span>
+    </div>
+    <div class="key">
+      <span>%</span>
+      <span>5</span>
+    </div>
+    <div class="key">
+      <span>^</span>
+      <span>6</span>
+    </div>
+    <div class="key">
+      <span>&amp;</span>
+      <span>7</span>
+    </div>
+    <div class="key">
+      <span>*</span>
+      <span>8</span>
+    </div>
+    <div class="key">
+      <span>(</span>
+      <span>9</span>
+    </div>
+    <div class="key">
+      <span>)</span>
+      <span>0</span>
+    </div>
+    <div class="key">
+      <span>_</span>
+      <span>-</span>
+    </div>
+    <div class="key">
+      <span>+</span>
+      <span>=</span>
+    </div>
+    <div class="key color1 kl4" title="啃鸡腿">🍖</div>
+    <div class="key color3 kl3" title="喝肉汤">🥘</div>
+    <div class="key">Q</div>
+    <div class="key">W</div>
+    <div class="key">E</div>
+    <div class="key">R</div>
+    <div class="key">T</div>
+    <div class="key">Y</div>
+    <div class="key">U</div>
+    <div class="key">I</div>
+    <div class="key">O</div>
+    <div class="key">P</div>
+    <div class="key">
+      <span>{</span>
+      <span>[</span>
+    </div>
+    <div class="key">
+      <span>}</span>
+      <span>]</span>
+    </div>
+    <div class="key gc3">
+      <span>|</span>
+      <span>\</span>
+    </div>
+    <div class="key color4 kl4" title="兔子爱吃红萝卜">🥕</div>
+    <div class="key">A</div>
+    <div class="key">S</div>
+    <div class="key">D</div>
+    <div class="key">F</div>
+    <div class="key">G</div>
+    <div class="key">H</div>
+    <div class="key">J</div>
+    <div class="key">K</div>
+    <div class="key">L</div>
+    <div class="key">
+      <span>:</span>
+      <span>;</span>
+    </div>
+    <div class="key">
+      <span>"</span>
+      <span>,</span>
+    </div>
+    <div class="key color5 kl4" title="给对象剥个虾">🍤</div>
+    <div class="key color6 kl5" title="糖炒板栗">🌰</div>
+    <div class="key">Z</div>
+    <div class="key">X</div>
+    <div class="key">C</div>
+    <div class="key">V</div>
+    <div class="key">B</div>
+    <div class="key">N</div>
+    <div class="key">M</div>
+    <div class="key">
+      <span>&lt;</span>
+      <span>,</span>
+    </div>
+    <div class="key">
+      <span>&gt;</span>
+      <span>.</span>
+    </div>
+    <div class="key">
+      <span>?</span>
+      <span>/</span>
+    </div>
+    <div class="key color5 kl5" title="小鸡炖蘑菇">🍄</div>
+    <div class="key color6 kl3" title="或=嚯啤酒">🍺</div>
+    <div class="key color7 kl3" title="爱笑甜甜圈">🍩</div>
+    <div class="key color5 kl3" title="来个汉堡">🍔</div>
+    <div class="key kl12" title="吃太多了">放屁键💨</div>
+    <div class="key color3 kl3" title="酸溜猕猴桃">🥝</div>
+    <div class="key color9" title="不吐籽葡萄">🍇</div>
+    <div class="key color9" title="添西瓜">🍉</div>
+    <div class="key color7" title="中国面">🍝</div>
+  </div>
+</body>
+
+</html>

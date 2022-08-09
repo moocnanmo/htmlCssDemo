@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background: #96dff0;
+    }
+
+    .center {
+      width: 100%;
+      height: auto;
+      margin: 20px 0 0 50px;
+      display: flex;
+    }
+
+    .content {
+      width: 200px;
+      min-width: 200px;
+      height: 200px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      border: 1px solid #7e1827;
+      font-weight: 300;
+      color: #7e1827;
+      padding: 10px 15px;
+      text-align: left;
+      border-radius: 10px;
+      margin-left: 60px;
+    }
+
+    .content .title {
+      font-size: 16px;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .content .text {
+      font-size: 13px;
+    }
+
+    .player {
+      width: 280px;
+      min-width: 280px;
+      height: 460px;
+      background: #ffc600;
+      border: 6px solid #5a1f12;
+      border-radius: 15px 15px 45px 15px;
+      position: relative;
+      box-shadow: 30px 20px 10px 10px #9e988b;
+    }
+
+    .head {
+      width: 100%;
+      height: 26px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-bottom: 5px solid #5a1f12;
+    }
+
+    .head::before {
+      content: '';
+      width: 6px;
+      height: 26px;
+      background: #5a1f12;
+      position: absolute;
+      top: 0;
+      left: 20px;
+    }
+
+    .head::after {
+      content: '';
+      width: 6px;
+      height: 26px;
+      background: #5a1f12;
+      position: absolute;
+      top: 0;
+      right: 20px;
+    }
+
+    .receiver {
+      width: 50px;
+      height: 8px;
+      background: #eba260;
+      border: 4px solid #5a1f12;
+      border-radius: 8px;
+      position: absolute;
+      top: 5px;
+      left: 35px;
+    }
+
+    .screen {
+      width: 220px;
+      height: 170px;
+      background: #9c6766;
+      border: 5px solid #5a1f12;
+      border-radius: 10px 10px 30px 10px;
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      margin-left: -115px;
+    }
+
+    .monitor {
+      width: 190px;
+      height: 140px;
+      background: #d5eabd;
+      border: 5px solid #5a1f12;
+      margin: 10px auto;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+
+    .monitor .light {
+      width: 20px;
+      height: 220px;
+      background: #e2f0d8;
+      position: absolute;
+      top: -33px;
+      left: -23px;
+      transform: rotate(44deg);
+      animation: monitorlight 3s infinite;
+    }
+
+    @keyframes monitorlight {
+      50% {
+        left: 80%;
+      }
+
+      51% {
+        left: 80%;
+        opacity: 1;
+      }
+
+      61% {
+        left: 80%;
+        opacity: 0.3;
+      }
+
+      71% {
+        left: 80%;
+        opacity: 1;
+      }
+
+      81% {
+        left: 80%;
+        opacity: 0.3;
+      }
+
+      91% {
+        left: 80%;
+        opacity: 1;
+      }
+
+      100% {
+        left: 80%;
+        opacity: 1;
+      }
+    }
+
+    .screen .game {
+      width: 190px;
+      height: 150px;
+      background: #d5eabd;
+      border-radius: 10px 10px 30px 10px;
+      margin: 10px auto;
+      display: none;
+    }
+
+    .game .left {
+      float: left;
+      width: 52%;
+      height: 128px;
+      border: 1px solid #333;
+      margin: 10px 0 0 10px;
+      position: relative;
+    }
+
+    .game .game-name {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #000;
+      line-height: 1;
+      background: rgba(158, 174, 134, 0.8);
+      justify-content: center;
+      display: none;
+    }
+
+    .game .game-name .name-box {
+      animation: 1.5s linear gamename forwards;
+      font-size: 15px;
+      padding: 54px 0 0 20px;
+    }
+
+    @keyframes gamename {
+      30% {
+        opacity: 0.3;
+      }
+
+      60% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.3;
+      }
+
+      91% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .game .left-content {
+      position: absolute;
+      top: 10px;
+      left: 8px;
+    }
+
+    .game .left-box .integral-block.b {
+      border: 2px solid #333;
+    }
+
+    .game .left-box .integral-block.b::after {
+      background: #333;
+    }
+
+    .game .right {
+      float: right;
+      width: 30%;
+      font-size: 12px;
+      font-weight: 300;
+      text-align: left;
+      line-height: 1.5;
+      padding: 10px;
+      color: #000;
+    }
+
+    .game .integral-num {
+      font-size: 13px;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .game .integral-graph {
+      position: relative;
+    }
+
+    .game .integral-box {
+      position: relative;
+      height: 14px;
+      width: 40px;
+    }
+
+    .game .integral-box .integral-block {
+      border: 2px solid #333;
+    }
+
+    .game .integral-box .integral-block::after {
+      background: #333;
+    }
+
+    .game .integral-block {
+      display: block;
+      width: 6px;
+      height: 6px;
+      padding: 1px;
+      border: 2px solid #9eae86;
+      margin: 0 2px 2px 0;
+      float: left;
+    }
+
+    .game .integral-block::after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: #9eae86;
+      overflow: hidden;
+    }
+
+    .game .integral-box1 {
+      top: 4px;
+      left: 13px;
+    }
+
+    .game .integral-box2 {
+      top: 7px;
+      left: 27px;
+    }
+
+    .dividing {
+      width: 100%;
+      height: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 220px;
+      left: 0;
+    }
+
+    .dleft {
+      width: 50px;
+      height: 5px;
+      background: #5a1f12;
+      margin-left: 30px;
+      border-radius: 5px;
+    }
+
+    .dcenter {
+      display: flex;
+    }
+
+    .dspot {
+      width: 3px;
+      height: 5px;
+      background: #5a1f12;
+      margin-right: 3px;
+      border-radius: 3px;
+    }
+
+    .dright {
+      width: 80px;
+      height: 5px;
+      background: #5a1f12;
+      margin-right: 30px;
+      border-radius: 5px;
+    }
+
+    .push-direction {
+      width: 80px;
+      height: 80px;
+      background: #ee9731;
+      border: 4px solid #5a1f12;
+      border-radius: 50%;
+      position: absolute;
+      top: 260px;
+      left: 15px;
+    }
+
+    .push-direction::before {
+      content: '';
+      width: 54px;
+      height: 20px;
+      background: #7b4a45;
+      position: absolute;
+      top: 30px;
+      left: 13px;
+      box-shadow: 0 -3px 0 0 #fff;
+      border-radius: 5px;
+    }
+
+    .push-direction::after {
+      content: '';
+      width: 20px;
+      height: 54px;
+      background: #7b4a45;
+      position: absolute;
+      top: 13px;
+      right: 30px;
+      box-shadow: 0 -3px 0 0 #fff;
+      border-radius: 5px;
+    }
+
+    .push-control {
+      width: 36px;
+      height: 80px;
+      background: #eb9430;
+      border: 4px solid #5a1f12;
+      border-radius: 40px;
+      position: absolute;
+      top: 260px;
+      right: 35px;
+      transform: rotate(55deg);
+    }
+
+    .push-control .begin,
+    .push-control .stop {
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      color: #fff;
+      background: #ff4822;
+      position: absolute;
+      left: 6px;
+      box-shadow: inset 0 3px 0 0 #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .push-control .begin {
+      top: 10px;
+    }
+
+    .push-control .stop {
+      top: 45px;
+    }
+
+    .push-sound {
+      width: 16px;
+      height: 50px;
+      background: #864949;
+      position: absolute;
+      top: 350px;
+      border: 2px solid #5a1f12;
+      border-radius: 16px;
+      box-shadow: inset 3px 0 0 0 #fff;
+      transform: rotate(60deg);
+    }
+
+    .push-sound::before {
+      content: '';
+      width: 24px;
+      height: 4px;
+      background: #5a1f12;
+      position: absolute;
+      bottom: 21px;
+      left: 12px;
+      border-radius: 4px;
+      transform: rotate(-90deg);
+    }
+
+    .push-sound-top {
+      left: 80px;
+    }
+
+    .push-sound-bottom {
+      left: 140px;
+    }
+
+    .receiver-footer {
+      width: 60px;
+      height: 8px;
+      background: #eba260;
+      border: 4px solid #5a1f12;
+      border-radius: 8px;
+      position: absolute;
+      bottom: 8px;
+      left: 100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="center">
+    <div class="player">
+      <div class="head">
+        <div class="receiver"></div>
+      </div>
+      <div class="screen">
+        <div class="monitor" id="monitor">
+          <div class="light"></div>
+        </div>
+        <div class="game" id="game">
+          <div class="left">
+            <div class="left-content">
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="left-box">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+            </div>
+            <div class="game-name" id="gameName">
+              <div class="name-box">游戏开始</div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="integral-title">最高分</div>
+            <div class="integral-num">10</div>
+            <div class="integral-title">起始行</div>
+            <div class="integral-num">0</div>
+            <div class="integral-title">下一个</div>
+            <div class="integral-graph">
+              <div class="integral-box integral-box1">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+              <div class="integral-box integral-box2">
+                <span class="integral-block"></span>
+                <span class="integral-block"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dividing">
+        <div class="dleft"></div>
+        <div class="dcenter">
+          <div class="dspot"></div>
+          <div class="dspot"></div>
+          <div class="dspot"></div>
+          <div class="dspot"></div>
+          <div class="dspot"></div>
+          <div class="dspot"></div>
+        </div>
+        <div class="dright"></div>
+      </div>
+      <div class="push-direction"></div>
+      <div class="push-control">
+        <div class="begin" id="pushBegin">开</div>
+        <div class="stop" id="pushStop">关</div>
+      </div>
+      <div class="push-sound push-sound-top"></div>
+      <div class="push-sound push-sound-bottom"></div>
+      <div class="receiver-footer"></div>
+    </div>
+    <div class="content">
+      <div class="title">掌上游戏机</div>
+      <div class="text">
+        <p>小学暑假，小叶子得到了第一台属于自己的掌上游戏机，迫不及待的打开，小叶子想先试试游戏机能不能正常使用。</p>
+        <p>小提示:游戏功能还在开发中，只能打开或者关闭屏幕哟~点击开始按键点亮屏幕，点击停止按键关闭屏幕。</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    var leftBox = document.getElementsByClassName('left-box');
+    var pushBegin = document.getElementById('pushBegin');
+    var pushStop = document.getElementById('pushStop');
+    var monitor = document.getElementById('monitor');
+    var game = document.getElementById('game');
+    var gameName = document.getElementById('gameName');
+
+    // 屏幕展示方法
+    function show () {
+      monitor.style.display = 'none';
+      game.style.display = 'block';
+      // 设置开始按钮不可以点击
+      pushBegin.disabled = false;
+      // 设置关闭按钮可以点击
+      pushStop.disabled = true;
+      setTimeout(function () {
+        for (var i = 0; i < leftBox.length; i++) {
+          var block = leftBox[i].getElementsByClassName('integral-block');
+          for (var j = 0; j < block.length; j++) {
+            block[j].classList.add('b');
+          }
+        }
+      }, 800);
+      setTimeout(function () {
+        gameName.style.display = 'block';
+      }, 1500);
+    }
+
+    // 屏幕停止方法
+    function stop () {
+      monitor.style.display = 'block';
+      game.style.display = 'none';
+      // 设置开始按钮可以点击
+      pushBegin.disabled = true;
+      // 设置关闭按钮不可以点击
+      pushStop.disabled = false;
+      for (var i = 0; i < leftBox.length; i++) {
+        var block = leftBox[i].getElementsByClassName('integral-block');
+        for (var j = 0; j < block.length; j++) {
+          block[j].classList.remove('b');
+        }
+      }
+    }
+    pushBegin.onclick = show;
+    pushStop.onclick = stop;
+  </script>
+</body>
+
+</html>

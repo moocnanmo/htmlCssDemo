@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 大西瓜</title>
+  <style>
+    .watermelon {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 150px;
+      background-image: radial-gradient(rgb(227, 108, 99) 50%, rgb(219, 220, 193) 60%, rgb(96, 148, 91) 70%);
+    }
+
+    .watermelon::before {
+      content: '';
+      width: 10px;
+      height: 8px;
+      border-radius: 4px;
+      background-color: #333;
+      position: absolute;
+      top: 146px;
+      left: 145px;
+      box-shadow:
+        0 80px 1px #333,
+        80px 0 1px #333,
+        -80px 0 1px #333,
+        0 -80px 1px #333,
+        57px 57px 1px #333,
+        -57px -57px 1px #333,
+        -57px 57px 1px #333,
+        57px -57px 1px #333;
+    }
+  </style>
+</head>
+
+<body style="padding: 200px">
+  <div class="watermelon"></div>
+</body>
+
+</html>
