@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 清除浮动 */
+    .clearfix::after {
+      content: '';
+      height: 0;
+      display: block;
+      clear: both;
+    }
+
+    .clearfix {
+      zoom: 1;
+    }
+
+    /* 清除原有样式 */
+    ul li {
+      list-style: none;
+    }
+
+    #wrap {
+      width: 700px;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    #wrap .left {
+      width: 300px;
+      height: 450px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .showBox img {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #000;
+    }
+
+    ul {
+      width: 300px;
+      text-align: center;
+    }
+
+    ul li {
+      float: left;
+    }
+
+    ul li:not(ul li:last-child) {
+      margin-right: 17px;
+    }
+
+    ul li img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .showBox {
+      position: relative;
+    }
+
+    .mask {
+      width: 100px;
+      height: 100px;
+      background-color: rgba(247, 182, 158, .5);
+      display: none;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .bigGlassImg {
+      position: absolute;
+    }
+
+    .right {
+      position: absolute;
+      right: 0;
+      top: 0;
+      overflow: hidden;
+      width: 350px;
+      height: 350px;
+      border: 1px solid #000;
+      display: none;
+    }
+
+    /* 点击时出现的样式 */
+    .active {
+      border: 1px solid rgb(233, 57, 57);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <div class="left">
+      <div class="top showBox">
+        <img src="https://s1.ax1x.com/2022/09/07/vHG5lT.jpg" alt="" class="showImg">
+        <div class="mask"></div>
+      </div>
+      <ul class="clearfix">
+        <li class="active"><img src="https://s1.ax1x.com/2022/09/07/vHG5lT.jpg" alt=""></li>
+        <li><img src="https://s1.ax1x.com/2022/09/07/vHGff0.jpg" alt=""></li>
+        <li><img src="https://s1.ax1x.com/2022/09/07/vHG4pV.jpg" alt=""></li>
+        <li><img src="https://s1.ax1x.com/2022/09/07/vHGoXF.jpg" alt=""></li>
+      </ul>
+    </div>
+    <div class="right bigGlass">
+      <img src="https://s1.ax1x.com/2022/09/07/vHG5lT.jpg" alt="" class="bigGlassImg">
+    </div>
+  </div>
+  <script>
+    class Glass {
+
+      imageUrl = ['https://s1.ax1x.com/2022/09/07/vHG5lT.jpg',
+        'https://s1.ax1x.com/2022/09/07/vHGff0.jpg',
+        'https://s1.ax1x.com/2022/09/07/vHG4pV.jpg',
+        'https://s1.ax1x.com/2022/09/07/vHGoXF.jpg'
+      ]
+      // 获取对象
+      constructor(id) {
+        this.root = document.querySelector(id)
+        this.mask = this.root.querySelector('.mask') //遮罩层mask
+        this.showBox = this.root.querySelector('.showBox') //显示图片showBox
+        this.bigGlass = this.root.querySelector('.bigGlass') //放大镜bigGlass
+        this.bigGlassImg = this.root.querySelector('.bigGlassImg') //背景图bigpicBox
+        this.ulLiEle = this.root.querySelectorAll('li')
+        this.showImg = this.root.querySelector('.showImg')
+      }
+
+      // 点击时移除元素身上所有样式
+      removeStyle () {
+        for (let i = 0; i < this.ulLiEle.length; i++) {
+          this.ulLiEle[i].classList.remove('active')
+        }
+      }
+      // 切换图片
+      changePic () {
+        for (let i = 0; i < this.ulLiEle.length; i++) {
+          let _this = this
+          this.ulLiEle[i].onclick = function () {
+            _this.removeStyle()
+            this.classList.add('active')
+            _this.showImg.src = _this.imageUrl[i]
+            _this.bigGlassImg.src = _this.imageUrl[i]
+          }
+        }
+      }
+      /**
+       *
+       * 计算背景图比例
+       *   遮罩层mask            放大镜bigGlass
+       *  ---------------   =   ------------------
+       *   显示图片showbox        背景图bigPicBox
+       *
+       *   背景图片bigpicbox = 放大镜bigGlass*显示图片showbox/遮罩层mask
+       */
+      // 设置放大图片的大小
+      setScale () {
+        this.bigGlassImg.style.width = this.bigGlass.offsetWidth * this.showBox.offsetWidth / this.mask.offsetWidth + 'px'
+        this.bigGlassImg.style.height = this.bigGlass.offsetHeight * this.showBox.offsetHeight / this.mask.offsetHeight + 'px'
+      }
+      // 移动遮罩层显示功能
+      moveGlass () {
+        this.showBox.onmousemove = (e) => {
+          e = e || window.event
+          let x = e.offsetX - this.mask.offsetWidth / 2
+          let y = e.offsetY - this.mask.offsetHeight / 2
+          // 边界判断
+          if (x < 0) {
+            x = 0
+          }
+          if (y < 0) {
+            y = 0
+          }
+          if (x > this.showBox.offsetWidth - this.mask.offsetWidth) {
+            x = this.showBox.offsetWidth - this.mask.offsetWidth
+          }
+          if (y > this.showBox.offsetHeight - this.mask.offsetHeight) {
+            y = this.showBox.offsetHeight - this.mask.offsetHeight
+          }
+          this.mask.style.left = x + 'px'
+          this.mask.style.top = y + 'px'
+
+          // 放大图片的移动位置
+          /**
+               遮罩层移动距离        遮罩层
+              ------------   =  ------------
+              背景图片移动距离      放大镜
+
+              背景图片移动距离 =  遮罩层移动距离*放大镜/遮罩层
+          **/
+          let bigX = x * this.bigGlass.offsetWidth / this.mask.offsetWidth
+          let bigY = y * this.bigGlass.offsetHeight / this.mask.offsetHeight
+          this.bigGlassImg.style.left = -bigX + 'px'
+          this.bigGlassImg.style.top = -bigY + 'px'
+        }
+
+        this.showBox.onmouseover = () => {
+          this.mask.style.display = 'block'
+          this.bigGlass.style.display = 'block'
+          this.setScale()
+
+        }
+        this.showBox.onmouseout = () => {
+          this.mask.style.display = 'none'
+          this.bigGlass.style.display = 'none'
+        }
+      }
+    }
+    let glass = new Glass('#wrap')
+    glass.moveGlass()
+    glass.changePic()
+  </script>
+</body>
+
+</html>
