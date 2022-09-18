@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      font-size: clamp(10px, 1.5vw, 100px);
+    }
+
+    body {
+      background: #5accd8;
+    }
+
+    .sky {
+      width: 50em;
+      min-width: 100%;
+      height: 10em;
+      background: linear-gradient(#5e9696 0% 30%,
+          #c5b493 55% 60%,
+          #ffad6a 90% 100%);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .sun {
+      width: 20em;
+      height: 20em;
+      background: linear-gradient(#fefefc 0% 10%,
+          #fdf3ce 25% 30%,
+          #fbe38d 45% 100%);
+      border-radius: 50%;
+      position: absolute;
+      left: max(50%, 25em);
+      top: 8em;
+      transform: translate(-50%, -40%);
+      filter: blur(1px);
+      box-shadow:
+        0px 10px 20px 1px #ffffffab inset,
+        0px 0px 20px 2px #fff4cec4;
+    }
+
+    .lake {
+      width: 50em;
+      min-width: 100%;
+      height: 40em;
+      min-height: calc(100vh - 10em);
+      background:
+        radial-gradient(ellipse at 50% -20%,
+          #f4eccc 0% 24%,
+          transparent 45% 100%),
+        linear-gradient(#f0c59d 0% 1%,
+          #00b9cc 10% 100%);
+      position: absolute;
+      left: 0;
+      top: 10em;
+    }
+
+    .fluctuating-water {
+      height: 16em;
+      width: 50em;
+      position: absolute;
+      top: 15em;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      background: radial-gradient(transparent 0% 25%,
+          #0ac5d970 29% 30%,
+          transparent 30% 35%,
+          #0ac5d970 39% 40%,
+          transparent 40% 45%,
+          #0ac5d970 49% 50%,
+          transparent 51% 100%) 50% 100% / 70em 12em no-repeat;
+      filter: blur(2px);
+    }
+
+    .swan {
+      height: 16em;
+      width: 20em;
+      position: absolute;
+      top: 10em;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+
+    .p1 {
+      width: 11.5em;
+      height: 11.5em;
+      border-radius: 95% 5% 70% 30% / 95% 30% 70% 5%;
+      background: #fff;
+      position: absolute;
+      top: 59.7%;
+      left: 50.3%;
+      transform: translate(-50%, -50%) rotate(50deg);
+    }
+
+    .p2 {
+      width: 3em;
+      height: 2.5em;
+      border-radius: 50%;
+      border-right: 1.7em solid #fff;
+      border-top: 2em solid transparent;
+      border-bottom: 2em solid transparent;
+      position: absolute;
+      top: 43.5%;
+      left: 72.0%;
+      transform: translate(-50%, -50%) rotate(-16deg);
+    }
+
+    .p3 {
+      width: 3em;
+      height: 3.4em;
+      border-radius: 50%;
+      border-right: 1.5em solid #fff;
+      border-top: 2.8em solid transparent;
+      border-bottom: 2.0em solid transparent;
+      position: absolute;
+      top: 48.3%;
+      left: 75.8%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+    }
+
+    .p4 {
+      width: 3em;
+      height: 3.2em;
+      border-radius: 50%;
+      border-left: 1.7em solid #fff;
+      border-top: 1.7em solid transparent;
+      border-bottom: 1.7em solid transparent;
+      position: absolute;
+      top: 24.1%;
+      left: 80.3%;
+      transform: translate(-50%, -50%) rotate(-23deg);
+    }
+
+    .p5 {
+      width: 3em;
+      height: 2.95em;
+      border-radius: 50%;
+      border-left: 1.5em solid #fff;
+      border-top: 1.5em solid transparent;
+      border-bottom: 1.7em solid #fff;
+      border-right: 1.7em solid transparent;
+      position: absolute;
+      top: 19.0%;
+      left: 82.5%;
+      transform: translate(-50%, -50%) rotate(100deg);
+    }
+
+    .p6 {
+      /*   background: #fff3; */
+      width: 3em;
+      height: 2em;
+      border-radius: 30% 40%;
+      border-right: 1.5em solid #fff;
+      border-top: 1.5em solid transparent;
+      border-bottom: 1.5em solid transparent;
+      position: absolute;
+      top: 18.4%;
+      left: 85.8%;
+      transform: translate(-50%, -50%) rotate(-5deg);
+    }
+
+    .p7 {
+      width: 1.8em;
+      height: 2.5em;
+      background: #fff;
+      border-radius: 50% 50% 59% 41% / 36% 43% 57% 64%;
+      position: absolute;
+      top: 24.5%;
+      left: 94.8%;
+      transform: translate(-50%, -50%) rotate(-20deg);
+    }
+
+    .p8 {
+      width: 1.8em;
+      height: 1.8em;
+      background: #ee8647;
+      clip-path: polygon(100% 0, 0 0, 53% 100%);
+      border-radius: 50%;
+      position: absolute;
+      top: 32.3%;
+      left: 96.8%;
+      transform: translate(-50%, -50%) rotate(-20deg);
+    }
+
+    .p9 {
+      width: 0.4em;
+      height: 0.4em;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 23.3%;
+      left: 96.5%;
+      transform: translate(-50%, -50%) rotate(-20deg);
+    }
+
+    .p10 {
+      width: 4em;
+      height: 5.5em;
+      border-radius: 95% 5% 70% 30% / 95% 30% 70% 5%;
+      background: #fff;
+      border-bottom: 0.2em solid #0003;
+      box-shadow: 0px 3px 3px -4px #0009;
+      position: absolute;
+      top: 65%;
+      left: 55.8%;
+      transform: translate(-50%, -50%) rotate(54deg);
+    }
+
+    .p11 {
+      width: 4.5em;
+      height: 6em;
+      border-radius: 95% 5% 70% 30% / 95% 30% 70% 5%;
+      background: #fff;
+      border-bottom: 0.2em solid #0003;
+      box-shadow: 0px 3px 3px -4px #0009;
+      position: absolute;
+      top: 62.5%;
+      left: 50.8%;
+      transform: translate(-50%, -50%) rotate(54deg);
+    }
+
+    .p12 {
+      width: 5.5em;
+      height: 6.5em;
+      border-radius: 95% 5% 70% 30% / 95% 30% 70% 5%;
+      background: #fff;
+      border-bottom: 0.2em solid #0003;
+      box-shadow: 0px 3px 3px -4px #0009;
+      position: absolute;
+      top: 57%;
+      left: 42.8%;
+      transform: translate(-50%, -50%) rotate(54deg);
+    }
+
+    .p13 {
+      width: 5.5em;
+      height: 7em;
+      border-radius: 95% 5% 70% 30% / 95% 30% 70% 5%;
+      background: #fff;
+      border-bottom: 0.2em solid #0003;
+      box-shadow: 0px 3px 3px -4px #0009;
+      position: absolute;
+      top: 52%;
+      left: 35.8%;
+      transform: translate(-50%, -50%) rotate(54deg);
+    }
+
+    .p14 {
+      width: 4em;
+      height: 11.5em;
+      border-radius: 99% 1% 100% 0% / 70% 35% 65% 30%;
+      background: #fff;
+      border-bottom: 0.2em solid #0003;
+      box-shadow: 0px 3px 3px -4px #0009;
+      position: absolute;
+      top: 47.5%;
+      left: 36.8%;
+      transform: translate(-50%, -50%) rotate(75deg);
+    }
+
+    .swan-shadow {
+      width: 7.5em;
+      height: 14.5em;
+      border-radius: 95% 5% 90% 10% / 95% 30% 70% 5%;
+      background: #0003;
+      box-shadow: 0 0 20px 20px #0003;
+      position: absolute;
+      top: 85%;
+      left: 60%;
+      transform: translate(-50%, -50%) rotate(60deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sky">
+    <div class="sun"></div>
+    <div class="lake">
+      <div class="fluctuating-water"></div>
+      <div class="swan">
+        <div class="swan-shadow"></div>
+        <div class="p1"></div>
+        <div class="p2"></div>
+        <div class="p3"></div>
+        <div class="p4"></div>
+        <div class="p5"></div>
+        <div class="p6"></div>
+        <div class="p7"></div>
+        <div class="p8"></div>
+        <div class="p9"></div>
+        <div class="p10"></div>
+        <div class="p11"></div>
+        <div class="p12"></div>
+        <div class="p13"></div>
+        <div class="p14"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
