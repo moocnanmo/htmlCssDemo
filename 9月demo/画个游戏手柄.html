@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #005ca3;
+      --accent: #0a45f5;
+      --desired-size: 75;
+      --controller-white: #f1f1f4;
+      --controller-black: #1f1f1f;
+      --unit: calc((var(--desired-size) / 1920) * 1vmin)
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      overflow: auto
+    }
+
+    .controller__container {
+      width: calc(1920 * var(--unit));
+      height: calc(1080 * var(--unit));
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%)
+    }
+
+    .controller__container:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 80%;
+      height: 35%;
+      z-index: -1;
+      background: radial-gradient(rgba(13, 13, 13, 0.5), transparent 50%);
+      -webkit-filter: blur(25px);
+      filter: blur(25px);
+      -webkit-transform: translate(-50%, 24%);
+      transform: translate(-50%, 24%)
+    }
+
+    .controller__body {
+      width: calc(1330 * var(--unit));
+      height: calc(880 * var(--unit));
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%)
+    }
+
+    .controller__body:before,
+    .controller__body:after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      height: 15%;
+      width: 40%;
+      -webkit-filter: blur(25px);
+      filter: blur(25px);
+      background: radial-gradient(#0d0d0d, transparent 75%)
+    }
+
+    .controller__body:before {
+      -webkit-transform: translate(-25%, 50%);
+      transform: translate(-25%, 50%);
+      left: 0
+    }
+
+    .controller__body:after {
+      right: 0;
+      -webkit-transform: translate(25%, 50%);
+      transform: translate(25%, 50%)
+    }
+
+    .controller__body-top {
+      width: 200%;
+      height: 125%;
+      background: var(--controller-white);
+      top: 1%;
+      left: 50%;
+      border-radius: 75% 75% 0 0/100% 100% 0 0;
+      position: absolute;
+      -webkit-transform: translate(-50%, 0%);
+      transform: translate(-50%, 0%)
+    }
+
+    .controller__body-top--center {
+      -webkit-clip-path: inset(0 32.5% 52% 32.5%);
+      clip-path: inset(0 32.5% 52% 32.5%);
+      -webkit-transform: translate(-50%, 0.4%);
+      transform: translate(-50%, 0.4%);
+      background: #dcdee4
+    }
+
+    .controller__body-top--left {
+      -webkit-clip-path: inset(0 62.5% 52% 30.5%);
+      clip-path: inset(0 62.5% 52% 30.5%)
+    }
+
+    .controller__body-top--right {
+      -webkit-clip-path: inset(0 30.5% 52% 62.5%);
+      clip-path: inset(0 30.5% 52% 62.5%)
+    }
+
+    .controller__grip {
+      --mirrored: 0;
+      --size: 250;
+      height: calc(var(--size) * var(--unit));
+      width: calc(var(--size) * var(--unit));
+      background: var(--controller-white);
+      border-radius: 25% 20% 25% 25%/25% 25% 25% 25%;
+      top: 5%;
+      position: absolute;
+      -webkit-transform: rotateY(calc(var(--mirrored) * 180deg)) rotate(-10.75deg);
+      transform: rotateY(calc(var(--mirrored) * 180deg)) rotate(-10.75deg)
+    }
+
+    .controller__grip div:nth-of-type(1) {
+      background: var(--controller-white);
+      height: 360%;
+      width: 100%;
+      position: absolute;
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-transform: rotate(19deg) translate(-26%, -8%);
+      transform: rotate(19deg) translate(-26%, -8%);
+      border-radius: 95% 0 0 69%;
+      -webkit-clip-path: inset(7.78% 0 50% 0);
+      clip-path: inset(7.78% 0 50% 0)
+    }
+
+    .controller__grip div:nth-of-type(2) {
+      background: var(--controller-white);
+      height: 360%;
+      width: 100%;
+      position: absolute;
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-transform: rotate(19deg) translate(-26%, -12%);
+      transform: rotate(19deg) translate(-26%, -12%);
+      border-radius: 100% 0 13% 60%/63% 0 25% 44%;
+      -webkit-clip-path: inset(50% 0 0 0);
+      clip-path: inset(50% 0 0 0)
+    }
+
+    .controller__grip div:nth-of-type(3) {
+      position: absolute;
+      background: var(--controller-white);
+      height: 200%;
+      width: 15%;
+      left: 0;
+      top: 230%;
+      -webkit-transform-origin: bottom center;
+      transform-origin: bottom center;
+      border-radius: 100%/50%;
+      -webkit-transform: rotate(32deg) translate(-671%, -32%);
+      transform: rotate(32deg) translate(-671%, -32%)
+    }
+
+    .controller__grip div:nth-of-type(4) {
+      position: absolute
+    }
+
+    .controller__grip--left {
+      left: 12%
+    }
+
+    .controller__grip--right {
+      --mirrored: 1;
+      right: 12%
+    }
+
+    .controller__sticks-container {
+      position: absolute;
+      left: 50%;
+      top: 25%;
+      width: 85%;
+      height: 76%;
+      overflow: hidden;
+      -webkit-transform: translate(-50%, 0%);
+      transform: translate(-50%, 0%)
+    }
+
+    .controller__sticks {
+      height: 38%;
+      width: 60%;
+      background: var(--controller-black);
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      border-radius: 19%/50%
+    }
+
+    .controller__sticks>div {
+      --lightness: rgba(166, 166, 166, 0.15);
+      position: absolute;
+      height: 100%;
+      width: 38%;
+      top: 0;
+      border-radius: 50%
+    }
+
+    .controller__sticks>div:before {
+      content: '';
+      background: linear-gradient(-30deg, var(--lightness), transparent, var(--lightness));
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      border-radius: 50%;
+      -webkit-filter: blur(3px);
+      filter: blur(3px)
+    }
+
+    .controller__sticks>div:after {
+      box-sizing: border-box;
+      content: '';
+      height: 90%;
+      width: 90%;
+      position: absolute;
+      border-radius: 50%;
+      border: calc(5 * var(--unit)) solid var(--lightness);
+      -webkit-filter: blur(6px);
+      filter: blur(6px);
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%)
+    }
+
+    .controller__sticks>div:nth-of-type(1) {
+      left: 0
+    }
+
+    .controller__sticks>div:nth-of-type(2) {
+      right: 0
+    }
+
+    .controller__sticks>div:nth-of-type(2) .controller__stick {
+      -webkit-transform: translate(-47%, -55%);
+      transform: translate(-47%, -55%)
+    }
+
+    .controller__stick {
+      height: 82%;
+      width: 82%;
+      background: #262626;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-53%, -55%);
+      transform: translate(-53%, -55%)
+    }
+
+    .controller__stick>div:nth-of-type(1) {
+      border: var(--unit) solid #000;
+      height: 85%;
+      width: 85%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      background: linear-gradient(5deg, rgba(255, 255, 255, 0.1), #1a1a1a, rgba(255, 255, 255, 0.1), #1a1a1a, rgba(255, 255, 255, 0.1));
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%
+    }
+
+    .controller__stick>div:nth-of-type(1) div {
+      height: 95%;
+      width: 95%;
+      background: #1a1a1a;
+      border-radius: 50%;
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%
+    }
+
+    .controller__stick>div:nth-of-type(2) {
+      background: repeating-conic-gradient(rgba(26, 26, 26, 0.5) 1deg, rgba(153, 153, 153, 0.5) 6deg), #666;
+      -webkit-filter: blur(1px);
+      filter: blur(1px);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      width: 75%;
+      height: 75%;
+      box-shadow: calc(-4 * var(--unit)) calc(2 * var(--unit)) calc(20 * var(--unit)) calc(2 * var(--unit)) #080808 inset
+    }
+
+    .controller__stick>div:nth-of-type(2) div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: radial-gradient(circle at 80% 100%, #262626, transparent), #666;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: 60%;
+      height: 60%;
+      box-shadow: calc(1 * var(--unit)) calc(2 * var(--unit)) calc(13 * var(--unit)) calc(2 * var(--unit)) rgba(255, 255, 255, 0.35), calc(-5 * var(--unit)) calc(-2 * var(--unit)) calc(10 * var(--unit)) calc(8 * var(--unit)) #262626, calc(5 * var(--unit)) calc(4 * var(--unit)) calc(10 * var(--unit)) calc(8 * var(--unit)) #262626
+    }
+
+    .controller__backdrop {
+      height: 60%;
+      width: 100%;
+      background: var(--controller-black)
+    }
+
+    .controller__clip {
+      background: var(--bg);
+      width: 65%;
+      height: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 3%);
+      transform: translate(-50%, 3%);
+      border-radius: 15% 15% 0 0/22% 22% 0 0;
+      -webkit-clip-path: inset(0 0 80% 0);
+      clip-path: inset(0 0 80% 0)
+    }
+
+    .controller__grip-underlay {
+      --mirrored: 0;
+      position: absolute;
+      width: 50%;
+      height: 150%;
+      top: 0;
+      -webkit-transform: rotateY(calc(var(--mirrored) * 180deg)) translate(-57%, -37%) rotate(10deg);
+      transform: rotateY(calc(var(--mirrored) * 180deg)) translate(-57%, -37%) rotate(10deg)
+    }
+
+    .controller__grip-underlay:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--controller-white);
+      border-radius: 50%/50%;
+      height: 40%;
+      width: 4%;
+      -webkit-transform-origin: bottom center;
+      transform-origin: bottom center;
+      -webkit-transform: translate(-253%, 0%) rotate(12deg);
+      transform: translate(-253%, 0%) rotate(12deg)
+    }
+
+    .controller__grip-underlay:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--controller-black);
+      height: 5%;
+      width: 20%;
+      border-radius: 0 0 4% 0/0 0 25% 0;
+      -webkit-transform: translate(-59%, -2%);
+      transform: translate(-59%, -2%)
+    }
+
+    .controller__grip-underlay div:nth-of-type(1) {
+      background: var(--controller-white);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 70%, 85% 99.5%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 85% 99.5%, 0 100%)
+    }
+
+    .controller__grip-underlay div:nth-of-type(2) {
+      background: var(--controller-black);
+      position: absolute;
+      height: 100%;
+      width: 26%;
+      right: 0;
+      bottom: 0;
+      -webkit-transform: translate(44%, 23.5%) rotate(14deg);
+      transform: translate(44%, 23.5%) rotate(14deg);
+      border-radius: 100% 0 0 100%/50% 0 0 50%;
+      -webkit-clip-path: polygon(0 25%, 60% 25%, 54% 77%, 0 79%);
+      clip-path: polygon(0 25%, 60% 25%, 54% 77%, 0 79%)
+    }
+
+    .controller__grip-underlay div:nth-of-type(2):after {
+      content: '';
+      background: var(--controller-white);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      height: 61%;
+      border-radius: 100% 0 0 100%/50% 0 0 100%
+    }
+
+    .controller__grip-underlay div:nth-of-type(3) {
+      background: var(--controller-white);
+      position: absolute;
+      bottom: 0;
+      width: 10%;
+      height: 7%;
+      right: 21%;
+      z-index: 2;
+      -webkit-transform: translate(0%, -3%) rotate(0deg);
+      transform: translate(0%, -3%) rotate(0deg);
+      border-radius: 0 0 65% 0/0 0 100% 0
+    }
+
+    .controller__grip-underlay div:nth-of-type(4) {
+      position: absolute;
+      background: var(--controller-white);
+      width: 40%;
+      height: 25%;
+      top: 21%;
+      right: -15%;
+      -webkit-transform: rotate(30deg) translate(-7%, -2%);
+      transform: rotate(30deg) translate(-7%, -2%);
+      border-radius: 0 100% 0 0/0 64% 0 0
+    }
+
+    .controller__grip-underlay--left {
+      left: 0
+    }
+
+    .controller__grip-underlay--right {
+      --mirrored: 1;
+      right: 0
+    }
+
+    .controller__touch-pad {
+      --touch-pad-inset: #aaa1a1;
+      --touch-pad-fade: rgba(255, 255, 255, 0.15);
+      position: absolute;
+      width: 42%;
+      height: 34.5%;
+      left: 50%;
+      top: 1.5%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      border-radius: 50% 50% 0 0/8% 8% 0 0;
+      overflow: hidden
+    }
+
+    .controller__touch-pad:after {
+      content: '';
+      position: absolute;
+      background: -webkit-gradient(linear, left top, left bottom, from(#b3b3b3), color-stop(#fff), to(transparent));
+      background: linear-gradient(#b3b3b3, #fff, transparent);
+      top: 0;
+      left: 50%;
+      width: 95%;
+      height: 30%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      border-radius: 18% 18% 0 0/50% 50% 0 0;
+      opacity: .5;
+      -webkit-clip-path: polygon(-2% 0, 102% 0, 98% 100%, 2% 100%);
+      clip-path: polygon(-2% 0, 102% 0, 98% 100%, 2% 100%)
+    }
+
+    .controller__touch-pad>div:nth-of-type(1) {
+      width: 86%;
+      height: 100%;
+      background: var(--touch-pad-fade);
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      border-radius: 0 0 14% 14%/0 0 25% 25%
+    }
+
+    .controller__touch-pad>div:nth-of-type(1):before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 65%;
+      height: 25%;
+      left: 50%;
+      background: var(--touch-pad-fade);
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0)
+    }
+
+    .controller__touch-pad>div:nth-of-type(1):after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 5%;
+      width: 20%;
+      border-radius: 50%;
+      background: radial-gradient(#fff, transparent);
+      -webkit-filter: blur(3px);
+      filter: blur(3px);
+      -webkit-transform: translate(-50%, 50%);
+      transform: translate(-50%, 50%)
+    }
+
+    .controller__touch-pad>div:nth-of-type(1) div {
+      --mirrored: 0;
+      background: var(--touch-pad-fade);
+      position: absolute;
+      height: 100%;
+      width: 15%;
+      border-radius: 80% 0 0 90%/13% 0 0 30%;
+      overflow: hidden;
+      -webkit-transform: rotateY(calc(var(--mirrored) * 180deg)) rotate(-11.5deg) translate(-23%, 2%);
+      transform: rotateY(calc(var(--mirrored) * 180deg)) rotate(-11.5deg) translate(-23%, 2%)
+    }
+
+    .controller__touch-pad>div:nth-of-type(1) div:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 20%;
+      top: 0;
+      left: 0;
+      background: var(--touch-pad-inset)
+    }
+
+    .controller__touch-pad>div:nth-of-type(1) div:after {
+      content: '';
+      position: absolute;
+      top: 8%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50% 0 0 0/10% 0 0 0;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(15%, var(--accent)), color-stop(85%, transparent));
+      background: linear-gradient(var(--accent) 15% 65%, transparent 85%)
+    }
+
+    .controller__touch-pad>div:nth-of-type(1) div:nth-of-type(1) {
+      top: 0;
+      left: 0
+    }
+
+    .controller__touch-pad>div:nth-of-type(1) div:nth-of-type(2) {
+      --mirrored: 1;
+      top: 0;
+      right: 0
+    }
+
+    .controller__touch-pad>div:nth-of-type(2) {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 94%;
+      width: 81%;
+      background: var(--controller-white);
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      border-radius: 0 0 15% 15%/0 0 25% 25%
+    }
+
+    .controller__touch-pad>div:nth-of-type(2):after,
+    .controller__touch-pad>div:nth-of-type(2):before {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 100%;
+      background: var(--controller-white);
+      width: 15%
+    }
+
+    .controller__touch-pad>div:nth-of-type(2):before {
+      left: 0;
+      border-radius: 100% 0 0 85%/12% 0 0 25%;
+      -webkit-transform: rotate(-12deg) translate(-27%, 0);
+      transform: rotate(-12deg) translate(-27%, 0)
+    }
+
+    .controller__touch-pad>div:nth-of-type(2):after {
+      right: 0;
+      border-radius: 0 100% 85% 0/0 12% 25% 0;
+      -webkit-transform: rotate(12deg) translate(27%, 0);
+      transform: rotate(12deg) translate(27%, 0)
+    }
+
+    .controller__speaker {
+      position: absolute;
+      top: 39%;
+      left: 50%;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      flex-direction: row;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0)
+    }
+
+    .controller__speaker div {
+      --size: 12;
+      background: #0d0d0d;
+      height: calc(var(--size) * var(--unit));
+      width: calc(var(--size) * var(--unit));
+      border-radius: 50%;
+      box-shadow: calc(-0.75 * var(--unit)) calc(0.5 * var(--unit)) calc(0.75 * var(--unit)) calc(0.5 * var(--unit)) inset rgba(255, 255, 255, 0.25)
+    }
+
+    .controller__speaker div:nth-of-type(odd) {
+      -webkit-transform: translate(0, -98%) scale(1.2);
+      transform: translate(0, -98%) scale(1.2)
+    }
+
+    .controller__speaker div:nth-of-type(even) {
+      -webkit-transform: translate(0, 70%) scale(1.2);
+      transform: translate(0, 70%) scale(1.2)
+    }
+
+    .controller__start {
+      position: absolute;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(68%, transparent), color-stop(70%, rgba(255, 255, 255, 0.5)), color-stop(72%, transparent)), #333;
+      background: linear-gradient(transparent 68%, rgba(255, 255, 255, 0.5) 70%, transparent 72%), #333;
+      top: 57.5%;
+      left: 50%;
+      border-radius: 15%/50%;
+      width: calc(68 * var(--unit));
+      height: calc(var(--unit) * 18);
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 calc(0 * var(--unit)) calc(4 * var(--unit)) #000, 0 0 calc(0 * var(--unit)) calc(1 * var(--unit)) rgba(255, 255, 255, 0.5) inset
+    }
+
+    .controller__headphone {
+      position: absolute;
+      left: 50%;
+      top: 63.5%;
+      border-radius: 50%;
+      width: calc(20 * var(--unit));
+      height: calc(8 * var(--unit));
+      background: #000;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0)
+    }
+
+    .controller__buttons {
+      position: absolute;
+      top: 23.75%;
+      left: 70.25%;
+      height: calc(90 * var(--unit));
+      width: calc(90 * var(--unit))
+    }
+
+    .controller__button {
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      position: absolute;
+      box-shadow: 0 0 calc(4 * var(--unit)) calc(4 * var(--unit)) rgba(115, 115, 115, 0.35) inset;
+      border: calc(2 * var(--unit)) solid #0d0d0d
+    }
+
+    .controller__button:after,
+    .controller__button:before {
+      content: '';
+      position: absolute;
+      width: 75%;
+      height: 75%;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%)
+    }
+
+    .controller__button--square {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0)
+    }
+
+    .controller__button--square:before {
+      width: 55%;
+      height: 55%;
+      border: calc(4 * var(--unit)) solid #404040
+    }
+
+    .controller__button--triangle {
+      -webkit-transform: translate(108%, -108%);
+      transform: translate(108%, -108%)
+    }
+
+    .controller__button--triangle:after,
+    .controller__button--triangle:before {
+      -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%)
+    }
+
+    .controller__button--triangle:before {
+      height: 60%;
+      width: 65%;
+      background: #404040;
+      -webkit-transform: translate(-50%, -50%) translate(0, -16%);
+      transform: translate(-50%, -50%) translate(0, -16%)
+    }
+
+    .controller__button--triangle:after {
+      background: var(--controller-white);
+      height: 48%;
+      width: 49%;
+      -webkit-transform: translate(-50%, -50%) translate(0, -16%);
+      transform: translate(-50%, -50%) translate(0, -16%)
+    }
+
+    .controller__button--cross {
+      -webkit-transform: translate(108%, 108%);
+      transform: translate(108%, 108%)
+    }
+
+    .controller__button--cross:after,
+    .controller__button--cross:before {
+      height: calc(4 * var(--unit));
+      background: #404040;
+      width: 70%
+    }
+
+    .controller__button--cross:after {
+      -webkit-transform: translate(-50%, -50%) rotate(45deg);
+      transform: translate(-50%, -50%) rotate(45deg)
+    }
+
+    .controller__button--cross:before {
+      -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+      transform: translate(-50%, -50%) rotate(-45deg)
+    }
+
+    .controller__button--circle {
+      -webkit-transform: translate(216%, 0%);
+      transform: translate(216%, 0%)
+    }
+
+    .controller__button--circle:before {
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      border: calc(4 * var(--unit)) solid #404040
+    }
+
+    .controller__dpad {
+      position: absolute;
+      width: calc(84 * var(--unit));
+      height: calc(100 * var(--unit));
+      top: 16%;
+      left: calc(210 * var(--unit))
+    }
+
+    .controller__dbutton {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: #666;
+      top: 0;
+      left: 0;
+      -webkit-transform-origin: bottom center;
+      transform-origin: bottom center;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 25%, 93% 70%, 57% 100%, 50% 100%, 43% 100%, 7% 70%, 0 25%);
+      clip-path: polygon(0 0, 100% 0, 100% 25%, 93% 70%, 57% 100%, 50% 100%, 43% 100%, 7% 70%, 0 25%);
+      border-radius: 35% 35% 0 0/27% 27% 0 0
+    }
+
+    .controller__dbutton--top {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0)
+    }
+
+    .controller__dbutton--right {
+      -webkit-transform: translate(0, 12%) rotate(90deg) translate(0, -14%);
+      transform: translate(0, 12%) rotate(90deg) translate(0, -14%)
+    }
+
+    .controller__dbutton--bottom {
+      -webkit-transform: translate(0, 12%) rotate(-180deg) translate(0, -14%);
+      transform: translate(0, 12%) rotate(-180deg) translate(0, -14%)
+    }
+
+    .controller__dbutton--left {
+      -webkit-transform: translate(0, 12%) rotate(-90deg) translate(0, -14%);
+      transform: translate(0, 12%) rotate(-90deg) translate(0, -14%)
+    }
+
+    .controller__dbutton>div {
+      background: rgba(242, 242, 242, 0.75);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      border-radius: 35%/27%;
+      width: 85%;
+      height: 85%;
+      -webkit-clip-path: polygon(0 0, 100% 0, 93% 70%, 57% 100%, 50% 100%, 43% 100%, 7% 70%);
+      clip-path: polygon(0 0, 100% 0, 93% 70%, 57% 100%, 50% 100%, 43% 100%, 7% 70%)
+    }
+
+    .controller__dbutton>div:after,
+    .controller__dbutton>div:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%)
+    }
+
+    .controller__dbutton>div:before {
+      background: var(--controller-white);
+      height: 90%;
+      background: var(--controller-white);
+      width: 90%;
+      border-radius: 35%/27%;
+      -webkit-clip-path: polygon(0 0, 100% 0, 93% 70%, 57% 100%, 50% 100%, 43% 100%, 7% 70%);
+      clip-path: polygon(0 0, 100% 0, 93% 70%, 57% 100%, 50% 100%, 43% 100%, 7% 70%)
+    }
+
+    .controller__dbutton>div:after {
+      background: #404040;
+      top: 26%;
+      width: 28%;
+      height: 14%;
+      -webkit-clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      clip-path: polygon(0 100%, 50% 0, 100% 100%)
+    }
+
+    .controller__trigger {
+      --mirrored: 0;
+      height: calc(80 * var(--unit));
+      width: calc(254 * var(--unit));
+      background: var(--controller-black);
+      position: absolute;
+      -webkit-transform: translate(0%, 0) rotateY(calc(var(--mirrored) * 180deg)) translate(-13%, 3%) rotate(-11deg);
+      transform: translate(0%, 0) rotateY(calc(var(--mirrored) * 180deg)) translate(-13%, 3%) rotate(-11deg);
+      border-radius: 60% 50% 0 0/100% 100% 0 0;
+      -webkit-clip-path: polygon(19% 0, 9% 100%, 86% 100%, 86% 0);
+      clip-path: polygon(19% 0, 9% 100%, 86% 100%, 86% 0);
+      overflow: hidden
+    }
+
+    .controller__trigger:after,
+    .controller__trigger:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%
+    }
+
+    .controller__trigger:before {
+      height: 25%;
+      width: 75%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, transparent), to(rgba(255, 255, 255, 0.25)));
+      background: linear-gradient(transparent 25%, rgba(255, 255, 255, 0.25))
+    }
+
+    .controller__trigger:after {
+      height: 75%;
+      top: 25%;
+      width: 100%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      background: -webkit-gradient(linear, left top, right top, color-stop(0, transparent), color-stop(rgba(255, 255, 255, 0.5)), color-stop(45%, transparent)), -webkit-gradient(linear, left top, right top, color-stop(0, transparent), color-stop(rgba(255, 255, 255, 0.5)), color-stop(80%, transparent));
+      background: linear-gradient(90deg, transparent 0 19%, rgba(255, 255, 255, 0.5), transparent 45% 55%), linear-gradient(90deg, transparent 0 69%, rgba(255, 255, 255, 0.5), transparent 80%)
+    }
+
+    .controller__trigger--left {
+      left: 12%
+    }
+
+    .controller__trigger--right {
+      --mirrored: 1;
+      right: 12%
+    }
+
+    .controller__auxiliary-button {
+      --mirrored: 0;
+      position: absolute;
+      top: 9%;
+      border: calc(2 * var(--unit)) solid #262626;
+      border-radius: 50%/30%;
+      background: var(--controller-white);
+      box-shadow: 0 0 calc(2 * var(--unit)) calc(2 * var(--unit)) rgba(115, 115, 115, 0.5) inset;
+      height: calc(62 * var(--unit));
+      width: calc(34 * var(--unit));
+      -webkit-transform: rotateY(calc(var(--mirrored) * 180deg)) rotate(-12deg) translate(-18%, -4%);
+      transform: rotateY(calc(var(--mirrored) * 180deg)) rotate(-12deg) translate(-18%, -4%)
+    }
+
+    .controller__auxiliary-button>div {
+      position: absolute;
+      top: 0;
+      left: 50%
+    }
+
+    .controller__auxiliary-button--share {
+      left: 26%
+    }
+
+    .controller__auxiliary-button--share>div {
+      background: #a6a6a6;
+      height: 24%;
+      width: 10%;
+      -webkit-transform-origin: bottom center;
+      transform-origin: bottom center;
+      -webkit-transform: translate(50%, -200%) rotate(12deg);
+      transform: translate(50%, -200%) rotate(12deg)
+    }
+
+    .controller__auxiliary-button--share>div:after,
+    .controller__auxiliary-button--share>div:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 70%;
+      width: 100%;
+      background: #a6a6a6;
+      -webkit-transform-origin: 50% 220%;
+      transform-origin: 50% 220%
+    }
+
+    .controller__auxiliary-button--share>div:before {
+      -webkit-transform: rotate(-33deg);
+      transform: rotate(-33deg)
+    }
+
+    .controller__auxiliary-button--share>div:after {
+      -webkit-transform: rotate(33deg);
+      transform: rotate(33deg)
+    }
+
+    .controller__auxiliary-button--options {
+      --mirrored: 1;
+      right: 26%
+    }
+
+    .controller__auxiliary-button--options>div {
+      background: #a6a6a6;
+      width: 10%;
+      height: 30%;
+      -webkit-transform: translate(0, -160%) rotate(102deg) translate(0, -22%);
+      transform: translate(0, -160%) rotate(102deg) translate(0, -22%)
+    }
+
+    .controller__auxiliary-button--options>div:after,
+    .controller__auxiliary-button--options>div:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: #a6a6a6
+    }
+
+    .controller__auxiliary-button--options>div:before {
+      -webkit-transform: translate(-250%, 0);
+      transform: translate(-250%, 0)
+    }
+
+    .controller__auxiliary-button--options>div:after {
+      -webkit-transform: translate(250%, 0);
+      transform: translate(250%, 0)
+    }
+
+    .controller__logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: calc(90 * var(--unit));
+      height: calc(70 * var(--unit));
+      -webkit-transform: translate(-50%, -74%);
+      transform: translate(-50%, -74%)
+    }
+
+    .controller__logo>div:nth-of-type(2) {
+      height: 96%;
+      width: 22%;
+      background: var(--controller-black);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: calc(3 * var(--unit)) solid #0d0d0d;
+      -webkit-transform: translate(-71%, -50%) skewY(15deg);
+      transform: translate(-71%, -50%) skewY(15deg)
+    }
+
+    .controller__logo>div:nth-of-type(2):after,
+    .controller__logo>div:nth-of-type(2):before {
+      content: '';
+      position: absolute
+    }
+
+    .controller__logo>div:nth-of-type(2):before {
+      left: 108%;
+      top: -5%;
+      width: 150%;
+      height: 62%;
+      background: var(--controller-black);
+      border: calc(3 * var(--unit)) solid #0d0d0d;
+      border-radius: 0 50% 50% 0
+    }
+
+    .controller__logo>div:nth-of-type(2):after {
+      left: 0;
+      width: 230%;
+      box-shadow: 0 0 calc(2 * var(--unit)) calc(2 * var(--unit)) rgba(255, 255, 255, 0.5) inset;
+      height: 20%;
+      background: var(--controller-black);
+      border-radius: 0 30% 0 0/0 100% 0 0;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 30%);
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 30%)
+    }
+
+    .controller__logo>div:nth-of-type(1) {
+      position: absolute;
+      height: 38%;
+      -webkit-transform-origin: bottom center;
+      transform-origin: bottom center;
+      width: 122%;
+      bottom: 0;
+      left: 32%;
+      -webkit-transform: skewX(62deg) rotate(-13deg) translate(-2%, -21%);
+      transform: skewX(62deg) rotate(-13deg) translate(-2%, -21%)
+    }
+
+    .controller__logo>div:nth-of-type(1) div:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 25%;
+      background: #0d0d0d;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      border-radius: 25%/50%
+    }
+
+    .controller__logo>div:nth-of-type(1) div:nth-of-type(1) {
+      height: 54%;
+      background: var(--controller-black);
+      position: absolute;
+      top: 45%;
+      width: 100%;
+      -webkit-clip-path: polygon(57% 0, 100% 0, 100% 100%, 19% 100%);
+      clip-path: polygon(57% 0, 100% 0, 100% 100%, 19% 100%);
+      border-radius: 25%/50%;
+      box-shadow: calc(-1 * var(--unit)) calc(1 * var(--unit)) calc(1 * var(--unit)) calc(1 * var(--unit)) rgba(255, 255, 255, 0.5) inset;
+      border: calc(2.5 * var(--unit)) solid #0d0d0d
+    }
+
+    .controller__logo>div:nth-of-type(1) div:nth-of-type(2) {
+      border: calc(2 * var(--unit)) solid #0d0d0d;
+      top: 2%;
+      width: 100%;
+      left: 2%;
+      position: absolute;
+      box-shadow: calc(-1 * var(--unit)) calc(1 * var(--unit)) calc(1 * var(--unit)) calc(1 * var(--unit)) rgba(255, 255, 255, 0.5) inset;
+      height: 58%;
+      background: var(--controller-black);
+      border-radius: 35%/50%;
+      -webkit-clip-path: polygon(0 0, 85% 0, 40% 100%, 0% 100%);
+      clip-path: polygon(0 0, 85% 0, 40% 100%, 0% 100%)
+    }
+
+    .controller__mute {
+      position: absolute;
+      width: calc(20 * var(--unit));
+      height: calc(20 * var(--unit));
+      top: 60%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0)
+    }
+
+    .controller__mute>div:nth-of-type(1) {
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      width: 62%;
+      height: 36%;
+      background: #808080;
+      border-radius: 0 0 25% 25%/0 0 50% 50%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0)
+    }
+
+    .controller__mute>div:nth-of-type(1):after,
+    .controller__mute>div:nth-of-type(1):before {
+      content: '';
+      position: absolute
+    }
+
+    .controller__mute>div:nth-of-type(1):before {
+      height: 200%;
+      width: 80%;
+      background: #808080;
+      border: var(--unit) solid var(--controller-black);
+      border-radius: 25%;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      -webkit-transform: translate(-50%, -60%);
+      transform: translate(-50%, -60%)
+    }
+
+    .controller__mute>div:nth-of-type(1):after {
+      width: 150%;
+      height: 50%;
+      border-radius: 25%/25%;
+      background: #808080;
+      border: var(--unit) solid var(--controller-black);
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -159%) rotate(45deg);
+      transform: translate(-50%, -159%) rotate(45deg)
+    }
+
+    .controller__mute>div:nth-of-type(2) {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      background: #808080;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      width: 60%;
+      height: 15%;
+      border-radius: 25%
+    }
+
+    .controller__mute>div:nth-of-type(2):after {
+      content: '';
+      left: 50%;
+      bottom: 0;
+      height: 200%;
+      background: #808080;
+      width: 25%;
+      position: absolute;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0)
+    }
+
+    .controller__patch {
+      --mirrrored: 0;
+      position: absolute;
+      bottom: 1.5%;
+      height: 25%;
+      width: 7%;
+      background: var(--controller-white);
+      border-radius: 50%/50%;
+      -webkit-transform-origin: bottom center;
+      transform-origin: bottom center
+    }
+
+    .controller__patch--left {
+      left: 4%;
+      -webkit-transform: rotate(6deg);
+      transform: rotate(6deg)
+    }
+
+    .controller__patch--right {
+      right: 4%;
+      -webkit-transform: rotate(-6deg);
+      transform: rotate(-6deg)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="controller">
+    <div class="controller__container">
+      <div class="controller__body">
+        <div class="controller__trigger controller__trigger--left"></div>
+        <div class="controller__trigger controller__trigger--right"></div>
+        <div class="controller__body-top controller__body-top--left"></div>
+        <div class="controller__body-top controller__body-top--right"></div>
+        <div class="controller__body-top controller__body-top--center"></div>
+        <div class="controller__grip controller__grip--left">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="controller__grip controller__grip--right">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="controller__sticks-container">
+          <div class="controller__backdrop"></div>
+          <div class="controller__clip"></div>
+          <div class="controller__grip-underlay controller__grip-underlay--left">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="controller__grip-underlay controller__grip-underlay--right">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="controller__sticks">
+            <div>
+              <div class="controller__stick">
+                <div>
+                  <div></div>
+                </div>
+                <div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="controller__stick">
+                <div>
+                  <div></div>
+                </div>
+                <div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="controller__touch-pad">
+          <div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="controller__speaker">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="controller__start"></div>
+        <div class="controller__headphone"></div>
+        <div class="controller__buttons">
+          <div class="controller__button controller__button--triangle"></div>
+          <div class="controller__button controller__button--square"></div>
+          <div class="controller__button controller__button--circle"></div>
+          <div class="controller__button controller__button--cross"></div>
+        </div>
+        <div class="controller__dpad">
+          <div class="controller__dbutton controller__dbutton--top">
+            <div></div>
+          </div>
+          <div class="controller__dbutton controller__dbutton--right">
+            <div></div>
+          </div>
+          <div class="controller__dbutton controller__dbutton--bottom">
+            <div></div>
+          </div>
+          <div class="controller__dbutton controller__dbutton--left">
+            <div></div>
+          </div>
+        </div>
+        <div class="controller__auxiliary-button controller__auxiliary-button--share">
+          <div></div>
+        </div>
+        <div class="
+          controller__auxiliary-button controller__auxiliary-button--options
+        ">
+          <div></div>
+        </div>
+        <div class="controller__logo">
+          <div>
+            <div></div>
+            <div></div>
+          </div>
+          <div></div>
+        </div>
+        <div class="controller__mute">
+          <div></div>
+          <div></div>
+        </div>
+        <div class="controller__patch controller__patch--left"></div>
+        <div class="controller__patch controller__patch--right"></div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
