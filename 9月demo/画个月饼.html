@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://lonely1201.github.io/Juejin/mooncake/js/three.js"></script>
+  <script src="https://lonely1201.github.io/Juejin/mooncake/js/OrbitControls.js"></script>
+  <script src="https://lonely1201.github.io/Juejin/mooncake/js/loader/TGALoader.js"></script>
+  <script src="https://lonely1201.github.io/Juejin/mooncake/js/loader/OBJLoader.js"></script>
+
+
+
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: Helvetica;
+    }
+
+    #stage,
+    video,
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    canvas {
+      z-index: 99;
+    }
+  </style>
+  <script>
+    let stage = document.querySelector('#stage');
+    let container;
+    let scene, camera, renderer, controls;
+    let SCREEN_WIDTH = window.innerWidth;
+    let SCREEN_HEIGHT = window.innerHeight;
+    let angle = 90;
+    let nearest = 1;
+    let farthest = 1000;
+    init();
+    function init () {
+      container = document.createElement('div');
+      stage.appendChild(container);
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(angle, SCREEN_WIDTH / SCREEN_HEIGHT, nearest, farthest);
+      camera.position.set(20, 20, 30);
+      scene.add(new THREE.AmbientLight(4210752, 3));
+      let light = new THREE.DirectionalLight(16777215, 1);
+      light.position.set(0, 50, 50);
+      scene.add(light);
+      let obj_loader = new THREE.OBJLoader();
+      obj_loader.setPath('https://lonely1201.github.io/Juejin/mooncake/models/mooncake/');
+      let tga_loader = new THREE.TGALoader();
+      let material = new THREE.MeshPhongMaterial({
+        map: tga_loader.load('https://lonely1201.github.io/Juejin/mooncake/models/mooncake/Sofa_OS_0727_01___Default_Diffuse.tga'),
+        normalMap: tga_loader.load('https://lonely1201.github.io/Juejin/mooncake/models/mooncake/Sofa_OS_0727_01___Default_Normal.tga'),
+        specularMap: tga_loader.load('https://lonely1201.github.io/Juejin/mooncake/models/mooncake/Sofa_OS_0727_01___Default_S.tga'),
+        bumpMap: tga_loader.load('https://lonely1201.github.io/Juejin/mooncake/models/mooncake/Sofa_OS_0727_01___Default_Bump.tga')
+      });
+      obj_loader.load('mooncake.obj', function (group) {
+        let geometry = group.children[0].geometry;
+        geometry.attributes.uv2 = geometry.attributes.uv;
+        geometry.center();
+        let mesh = new THREE.Mesh(geometry, material);
+        mesh.scale.multiplyScalar(.3);
+        scene.add(mesh);
+      });
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+      container.appendChild(renderer.domElement);
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 0, 0);
+      animate();
+    }
+    function animate () {
+      requestAnimationFrame(animate);
+      render();
+      window.addEventListener('resize', onWindowResize, false);
+    }
+    function render () {
+      renderer.render(scene, camera);
+    }
+    function onWindowResize () {
+      SCREEN_WIDTH = window.innerWidth;
+      SCREEN_HEIGHT = window.innerHeight;
+      renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+      camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+      camera.updateProjectionMatrix();
+    }
+  </script>
+</head>
+
+<body>
+  <div id="stage"></div>
+</body>
+
+</html>
