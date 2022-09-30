@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    body>.content {
+      width: 100%;
+      height: 800px;
+      background: linear-gradient(#aae3fd 60%, #95db7e 80px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body>.content>.cloud {
+      position: absolute;
+      top: 5%;
+      color: #d8f2fe;
+    }
+
+    body>.content>.cloud>.content {
+      width: 50px;
+      height: 50px;
+      background: currentColor;
+      border-radius: 100% 100% 0 0;
+    }
+
+    body>.content>.cloud>.content::before,
+    body>.content>.cloud>.content::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+    }
+
+    body>.content>.cloud>.content::before {
+      width: 40px;
+      height: 40px;
+      background: currentColor;
+      left: -20px;
+      border-radius: 100% 100% 0 100%;
+    }
+
+    body>.content>.cloud>.content::after {
+      width: 35px;
+      height: 30px;
+      background: currentColor;
+      right: -20px;
+      border-radius: 100% 100% 100% 0;
+    }
+
+    body>.content>.cloud>.content,
+    body>.content>.cloud .content::before,
+    body>.content>.cloud .content::after {
+      box-shadow: -200px 50px 0 -5px #bfe8fc, 200px 60px 0 10px #bfe9fd;
+    }
+
+    body>.content>.egg {
+      width: 220px;
+      height: 260px;
+      border-radius: 100%;
+      background: linear-gradient(#fef9f9 60%, #ddd5d5);
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 -10px 10px 3px rgba(211, 194, 194, 0.4) inset;
+    }
+
+    body>.content>.egg>.eye::before,
+    body>.content>.egg .eye::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      width: 12px;
+      height: 28px;
+      border-radius: 100%;
+      background: radial-gradient(white 1px, #393839 5%);
+    }
+
+    body>.content>.egg>.eye::before {
+      left: 28%;
+    }
+
+    body>.content>.egg>.eye::after {
+      right: 28%;
+    }
+
+    body>.content>.egg>.blush::before,
+    body>.content>.egg .blush::after {
+      content: '';
+      position: absolute;
+      top: 30%;
+      width: 25px;
+      height: 5px;
+      transform: rotate(0deg);
+      background: #fa6c7f;
+      border-radius: 100%;
+      box-shadow: 0 0 5px 4px #fa6c7f;
+    }
+
+    body>.content>.egg>.blush::before {
+      left: 20%;
+    }
+
+    body>.content>.egg>.blush::after {
+      right: 20%;
+    }
+
+    body>.content>.egg>.mouth {
+      position: absolute;
+      top: 32%;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #ffcf00 50%, #e0b802 50%);
+      transform: rotate(45deg);
+      border-radius: 5% 15%;
+    }
+
+    body>.content>.egg>.feet::before,
+    body>.content>.egg .feet::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      width: 10px;
+      height: 15px;
+      border: 7px solid #473114;
+    }
+
+    body>.content>.egg>.feet::before {
+      left: 60px;
+      border-radius: 80% 100% 100% 50%;
+      transform: rotate(-10deg);
+      border-color: transparent transparent transparent #473114;
+    }
+
+    body>.content>.egg>.feet::after {
+      right: 60px;
+      border-radius: 100% 80% 50% 0%;
+      transform: rotate(10deg);
+      border-color: transparent #473114 transparent transparent;
+    }
+
+    body>.content>.crest {
+      position: relative;
+      top: -17%;
+      width: 30px;
+      height: 25px;
+      background: #e91313;
+      border-radius: 50% 100% 20% 20%;
+    }
+
+    body>.content>.crest::before,
+    body>.content .crest::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      background: #e91313;
+    }
+
+    body>.content>.crest::before {
+      left: -5px;
+      height: 20px;
+      border-radius: 100% 50% 0 20%;
+    }
+
+    body>.content>.crest::after {
+      right: -15px;
+      height: 15px;
+      background: #e91313;
+      border-radius: 20% 200% 20% 30%;
+    }
+
+    body>.content>.hand {
+      position: relative;
+      top: -5%;
+    }
+
+    body>.content>.hand::before,
+    body>.content .hand::after {
+      content: '';
+      position: absolute;
+    }
+
+    body>.content>.hand::before {
+      left: -135px;
+      width: 20px;
+      height: 80px;
+      transform: rotate(15deg);
+      background: #faf2f2;
+      border-radius: 100% 0 50% 50%;
+    }
+
+    body>.content>.hand::after {
+      right: -110px;
+      width: 20px;
+      height: 80px;
+      transform: rotate(-15deg);
+      background: #faf2f2;
+      border-radius: 50% 100% 50% 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <!-- 天上的云 -->
+    <div class="cloud">
+      <div class="content"></div>
+    </div>
+    <!--鸡冠-->
+    <div class="crest"></div>
+    <!--翅膀-->
+    <div class="hand"></div>
+    <!-- 宠物小鸡body -->
+    <div class="egg">
+      <!--眼睛-->
+      <div class="eye"></div>
+      <!--腮红-->
+      <div class="blush"></div>
+      <!--嘴-->
+      <div class="mouth"></div>
+      <!--脚-->
+      <div class="feet"></div>
+    </div>
+
+  </div>
+</body>
+
+</html>
